@@ -1,15 +1,30 @@
 export namespace HotelsR {
 
-    export namespace getLovedHotelById {
-        export const route = '/hotel/getLovedById';
+    export namespace getLovedHotelByUserId {
+        export const route = '/hotel/getLovedByUserId';
 
         export interface RequestI {
             id: number;
         }
 
         export interface ResponseI {
+            id?: number;
             name?: string;
+            price?: number;
             description?: string;
+            image?: string;
+        }
+    }
+
+    export namespace getImage {
+        export const route = '/hotel/image';
+
+        export interface RequestI {
+            id: number;
+        }
+
+        export interface ResponseI {
+            id?: number;
             image?: string;
         }
     }
