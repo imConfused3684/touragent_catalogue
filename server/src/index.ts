@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import HotelsCtrl from './pages/Hotels/HotelsCtrl';
-import UsersCtrl from './pages/Comments/UsersCtrl';
+import UsersCtrl from './pages/Users/UsersCtrl';
 
 const PORT = 5000;
 
