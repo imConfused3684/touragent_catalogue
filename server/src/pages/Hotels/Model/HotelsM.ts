@@ -1,11 +1,11 @@
-import { HotlesSQL } from "../../../Infrastructure/Repository/HotelsSQL";
+import { HotelsSQL } from "../../../Infrastructure/Repository/HotelsSQL";
 import { HotelsR as R } from "../HotelsR";
 
 export class HotelsM {
-    private AnimalsSQL: HotlesSQL;
+    private AnimalsSQL: HotelsSQL;
 
     constructor() {
-        this.AnimalsSQL = new HotlesSQL();
+        this.AnimalsSQL = new HotelsSQL();
     }
 
     public async getAllHotels(): Promise<R.getAll.ResponseI> {

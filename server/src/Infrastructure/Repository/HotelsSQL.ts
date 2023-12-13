@@ -1,8 +1,8 @@
-import { HotelsWithImage, LovedHotels, hotelById, Hotel, Service, Image, UsersE, HotelE, ImageE, ServiceE, UserHotelsE} from "../Entity/HotelsE";
+import { HotelsWithImage, hotelById, Hotel, Service, Image, HotelE, ImageE, ServiceE, UserHotelsE} from "../Entity/HotelsE";
 import config from "../../../config";
 import knex, { Knex } from "knex";
 
-export class HotlesSQL {
+export class HotelsSQL {
     db: Knex;
 
     constructor() {
