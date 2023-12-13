@@ -1,8 +1,8 @@
-import { HotelsWithImage, LovedHotels, hotelById, Hotel, Service, Image, UsersE, HotelE, ImageE, ServiceE, UserHotelsE} from "../Entity/HotelsE";
+import { HotelsWithImage, hotelById, Hotel, Service, Image, HotelE, ImageE, ServiceE, UserHotelsE} from "../Entity/HotelsE";
 import config from "../../../config";
 import knex, { Knex } from "knex";
 
-export class HotlesSQL {
+export class HotelsSQL {
     db: Knex;
 
     constructor() {
@@ -49,5 +49,37 @@ export class HotlesSQL {
         }
 
         return vHotelWithServ;
+    }
+
+    public async getLovedHotelByUserId(nId: number): Promise<Hotel> {
+        let vHotel: Hotel = {};
+
+        try {
+            vHotel = await this.db<Hotel>({ use: UserHotelsE.NAME })
+                .leftJoin({ h: HotelE.NAME }, 'h.id', 'use.hotel_id')
+                .leftJoin({ img: ImageE.NAME }, 'img.hotel_id', 'h.id')
+                .where('img.img_id', 0)
+                .andWhere('use.user_id', nId)
+                .select('h.id', 'h.name', 'h.price', 'h.description','img.base64');
+        } catch (e) {
+            console.log('get all hotels witg imgs sql ERROR', e);
+        }
+
+        return vHotel;
+    }
+
+    public async getImage(nId: number): Promise<Image> {
+        let vImage: Image = {};
+
+        try {
+            vImage = await this.db<Hotel>({ img: ImageE.NAME })
+                .where('img.hotel_id', nId)
+                .orderBy( 'img.img_id', 'asc')
+                .select('img.img_id','img.base64');
+        } catch (e) {
+            console.log('get all hotels witg imgs sql ERROR', e);
+        }
+
+        return vImage;
     }
 }

@@ -6,19 +6,9 @@ export interface HotelsWithImage {
     image?: string;
 }
 
-export interface LovedHotels {
-
-    aHotels?: {
-        id?: number;
-        name?: string;
-        price?: number;
-        description?: string;
-    }
-
-    aImages?: {
-        img_id?: number;
-        image?: string;
-    }
+export interface Images{
+    img_id?: number;
+    image?: string;
 }
 
 export interface hotelById {
