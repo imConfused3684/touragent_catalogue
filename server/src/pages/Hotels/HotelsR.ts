@@ -56,6 +56,10 @@ export namespace HotelsR {
                 price?: number;
                 description?: string;
                 image?: string;
+                
+                food?: string;
+                type?: string;
+                nearWater?: number;
             }
 
             aServices?: {
@@ -63,6 +67,28 @@ export namespace HotelsR {
                 name?: string;
                 description?: string;
             }
+        }
+    }
+
+    export namespace getFiltered {
+        export const route = '/hotel/getFiltered';
+
+        export interface RequestI {
+            hotelTName: string,
+            hotelType: number,
+            food: number,
+            sort: number,
+            budget: number,
+            rating: number,
+            nearWater: number,
+            limit: number
+        }
+
+        export interface ResponseI {
+            id?: number;
+            name?: string;
+            price?: number;
+            image?: string;
         }
     }
 }

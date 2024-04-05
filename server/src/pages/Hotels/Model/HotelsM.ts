@@ -31,4 +31,21 @@ export class HotelsM {
 
         return vImage
     }
+
+    public async getFiltered(data: R.getFiltered.RequestI): Promise<R.getFiltered.ResponseI> {
+        const vFilter = await this.HitelsSQL.getFiltered(
+            data.hotelTName, 
+            data.hotelType,
+            data.food,
+            data.sort,
+            data.budget,
+            data.rating,
+            data.nearWater,
+            data.limit
+        );
+
+        console.log(data);
+
+        return vFilter
+    }
 }
