@@ -65,4 +65,15 @@ router.post(R.getFiltered.route, async (req, res) => {
     res.json(response)
 });
 
+router.get(R.search.route, async (req, res) => {
+    const request = req.params as R.search.RequestI;
+
+    let response: R.search.ResponseI = {};
+
+    const ctrl = new HotelsCtrl();
+    response = await ctrl.HotelsM.search(request);
+    
+    res.json(response)
+});
+
 export default router 

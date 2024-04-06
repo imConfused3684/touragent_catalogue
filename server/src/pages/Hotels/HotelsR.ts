@@ -91,4 +91,16 @@ export namespace HotelsR {
             image?: string;
         }
     }
+
+    export namespace search {
+        export const route = '/hotel/search/:name';
+
+        export interface RequestI {
+            name: string
+        }
+
+        export interface ResponseI {
+            name?: string;
+        }
+    }
 }

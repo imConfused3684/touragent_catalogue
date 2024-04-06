@@ -1,4 +1,4 @@
-import { HotelsWithImage, hotelById, Hotel, Service, Image, HotelE, ImageE, ServiceE, UserHotelsE, FoodTypesE, HotelTypesE} from "../Entity/HotelsE";
+import { HotelsWithImage, hotelById, Hotel, Service, Image, SearchS, HotelE, ImageE, ServiceE, UserHotelsE, FoodTypesE, HotelTypesE} from "../Entity/HotelsE";
 import config from "../../../config";
 import knex, { Knex, QueryBuilder } from "knex";
 
@@ -135,4 +135,19 @@ export class HotelsSQL {
 
         return vFilteredHotels;
     }
+
+    public async search(sHotelTName: string): Promise<SearchS> {
+        let vName: SearchS = {};
+
+        try {
+            vName = await this.db<SearchS>({ h: HotelE.NAME })
+            .where('h.name', 'like', sHotelTName + "%")
+            .select('h.name');
+        } catch (e) {
+            console.log('get all hotels witg imgs sql ERROR', e);
+        }
+
+        return vName;
+    }
+
 }

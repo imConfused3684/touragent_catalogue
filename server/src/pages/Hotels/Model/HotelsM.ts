@@ -48,4 +48,12 @@ export class HotelsM {
 
         return vFilter
     }
+
+    public async search(data: R.search.RequestI): Promise<R.search.ResponseI> {
+        const vImage = await this.HitelsSQL.search(data.name);
+
+        console.log(data);
+
+        return vImage
+    }
 }

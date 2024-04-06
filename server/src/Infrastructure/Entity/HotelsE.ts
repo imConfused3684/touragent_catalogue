@@ -51,6 +51,10 @@ export interface Image {
     image?: string;
 }
 
+export interface SearchS {
+    name?: string;
+}
+
 export class HotelTypesE {
     public static NAME = 'hotetype';
 }
