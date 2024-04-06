@@ -15,7 +15,9 @@ export class HotelsM {
     }
 
     public async getById(data: R.getById.RequestI): Promise<R.getById.ResponseI> {
-        const vHotel = await this.HitelsSQL.getById(data.id);
+        console.log(data.id);
+        console.log(data);
+        const vHotel = await this.HitelsSQL.getById(Number(data.id));
 
         return vHotel
     }
@@ -28,6 +30,31 @@ export class HotelsM {
 
     public async getImage(data: R.getImage.RequestI): Promise<R.getImage.ResponseI> {
         const vImage = await this.HitelsSQL.getImage(data.id);
+
+        return vImage
+    }
+
+    public async getFiltered(data: R.getFiltered.RequestI): Promise<R.getFiltered.ResponseI> {
+        const vFilter = await this.HitelsSQL.getFiltered(
+            data.hotelTName, 
+            data.hotelType,
+            data.food,
+            data.sort,
+            data.budget,
+            data.rating,
+            data.nearWater,
+            data.limit
+        );
+
+        console.log(data);
+
+        return vFilter
+    }
+
+    public async search(data: R.search.RequestI): Promise<R.search.ResponseI> {
+        const vImage = await this.HitelsSQL.search(data.name);
+
+        console.log(data);
 
         return vImage
     }

@@ -19,6 +19,10 @@ export interface hotelById {
         price?: number;
         description?: string;
         image?: string;
+
+        food?: string;
+        type?: string;
+        nearWater?: number;
     }
 
     aServices?: {
@@ -45,6 +49,18 @@ export interface Service {
 export interface Image {
     img_id?: number;
     image?: string;
+}
+
+export interface SearchS {
+    name?: string;
+}
+
+export class HotelTypesE {
+    public static NAME = 'hotetype';
+}
+
+export class FoodTypesE {
+    public static NAME = 'feeding';
 }
 
 
