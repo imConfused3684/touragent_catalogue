@@ -42,10 +42,10 @@ export namespace HotelsR {
 
 
     export namespace getById {
-        export const route = '/hotel/getById';
+        export const route = '/hotel/getById/:id';
 
         export interface RequestI {
-            id: number;
+            id: string;
         }
 
         export interface ResponseI {

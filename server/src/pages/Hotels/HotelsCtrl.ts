@@ -21,8 +21,8 @@ router.get(R.getAll.route, async (req, res) => {
     res.json(response)
 });
 
-router.post(R.getById.route, async (req, res) => {
-    const request = req.body as R.getById.RequestI;
+router.get(R.getById.route, async (req, res) => {
+    const request = req.params as R.getById.RequestI;
 
     let response: R.getById.ResponseI = {};
 

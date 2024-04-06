@@ -15,7 +15,9 @@ export class HotelsM {
     }
 
     public async getById(data: R.getById.RequestI): Promise<R.getById.ResponseI> {
-        const vHotel = await this.HitelsSQL.getById(data.id);
+        console.log(data.id);
+        console.log(data);
+        const vHotel = await this.HitelsSQL.getById(Number(data.id));
 
         return vHotel
     }
