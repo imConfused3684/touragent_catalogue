@@ -1,22 +1,13 @@
 import { Router } from 'express';
 import { HotelsR as R } from './HotelsR';
-import { HotelsM } from './Model/HotelsM';
+import { HotelsSQL } from "../../Infrastructure/Repository/HotelsSQL";
 
 const router = Router();
-
-export class HotelsCtrl {
-    public HotelsM: HotelsM
-
-    constructor() {
-        this.HotelsM = new HotelsM();
-    }
-}
 
 router.get(R.getAll.route, async (req, res) => {
     let response: R.getAll.ResponseI = {};
 
-    const ctrl = new HotelsCtrl();
-    response = await ctrl.HotelsM.getAllHotels();
+    response = await (new HotelsSQL).getAllHotels();
     
     res.json(response)
 });
@@ -26,8 +17,7 @@ router.get(R.getById.route, async (req, res) => {
 
     let response: R.getById.ResponseI = {};
 
-    const ctrl = new HotelsCtrl();
-    response = await ctrl.HotelsM.getById(request);
+    response = await (new HotelsSQL).getById(Number(request.id));
     
     res.json(response)
 });
@@ -37,8 +27,7 @@ router.post(R.getLovedHotelByUserId.route, async (req, res) => {
 
     let response: R.getLovedHotelByUserId.ResponseI = {};
 
-    const ctrl = new HotelsCtrl();
-    response = await ctrl.HotelsM.getLovedHotelByUserId(request);
+    response = await (new HotelsSQL).getLovedHotelByUserId(request.id);
     
     res.json(response)
 });
@@ -48,8 +37,7 @@ router.post(R.getImage.route, async (req, res) => {
 
     let response: R.getImage.ResponseI = {};
 
-    const ctrl = new HotelsCtrl();
-    response = await ctrl.HotelsM.getImage(request);
+    response = await (new HotelsSQL).getImage(request.id);
     
     res.json(response)
 });
@@ -59,8 +47,16 @@ router.post(R.getFiltered.route, async (req, res) => {
 
     let response: R.getFiltered.ResponseI = {};
 
-    const ctrl = new HotelsCtrl();
-    response = await ctrl.HotelsM.getFiltered(request);
+    response = await (new HotelsSQL).getFiltered(
+        request.hotelTName, 
+        request.hotelType,
+        request.food,
+        request.sort,
+        request.budget,
+        request.rating,
+        request.nearWater,
+        request.limit
+    );
     
     res.json(response)
 });
@@ -70,8 +66,7 @@ router.get(R.search.route, async (req, res) => {
 
     let response: R.search.ResponseI = {};
 
-    const ctrl = new HotelsCtrl();
-    response = await ctrl.HotelsM.search(request);
+    response = await (new HotelsSQL).search(request.name);
     
     res.json(response)
 });
