@@ -10,3 +10,6 @@ node_modules/
 
 #Secret data
 config.ts
+
+#dont think about it
+src/pages/Hotels/Model/

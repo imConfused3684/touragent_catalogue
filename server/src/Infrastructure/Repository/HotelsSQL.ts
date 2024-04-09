@@ -1,6 +1,6 @@
 import { HotelsWithImage, hotelById, Hotel, Service, Image, SearchS, HotelE, ImageE, ServiceE, UserHotelsE, FoodTypesE, HotelTypesE} from "../Entity/HotelsE";
 import config from "../../../config";
-import knex, { Knex, QueryBuilder } from "knex";
+import knex, { Knex } from "knex";
 
 export class HotelsSQL {
     db: Knex;
@@ -130,7 +130,7 @@ export class HotelsSQL {
         } catch (e) {
             console.log('get all hotels witg imgs sql ERROR', e);
         }
-        console.log("--------------------limit " + nLimit + " \n")
+        //console.log("--------------------limit " + nLimit + " \n")
         //console.log(vFilteredHotels)
 
         return vFilteredHotels;
