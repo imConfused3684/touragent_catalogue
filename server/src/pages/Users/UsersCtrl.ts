@@ -5,7 +5,6 @@ import { check, validationResult } from "express-validator";
 
 const router = Router();
 
-
 router.post(R.loginCheck.route, async (req, res) => {
     try{
         const request = req.body as R.loginCheck.RequestI;

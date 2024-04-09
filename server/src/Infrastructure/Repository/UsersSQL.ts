@@ -1,12 +1,12 @@
 import { UserId, UsersE} from "../Entity/UsersE";
-import config from "../../../config";
+import { knexconfig } from "../../../config";
 import knex, { Knex } from "knex";
 
 export class UsersSQL {
     db: Knex;
 
     constructor() {
-        this.db = knex(config)
+        this.db = knex(knexconfig)
     }
 
     public async loginCheck(sLogin: string, sPassword: string){
