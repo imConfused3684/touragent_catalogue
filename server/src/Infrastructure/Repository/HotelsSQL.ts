@@ -1,12 +1,12 @@
 import { HotelsWithImage, hotelById, Hotel, Service, Image, SearchS, HotelE, ImageE, ServiceE, UserHotelsE, FoodTypesE, HotelTypesE} from "../Entity/HotelsE";
-import config from "../../../config";
+import { knexconfig } from "../../../config";
 import knex, { Knex } from "knex";
 
 export class HotelsSQL {
     db: Knex;
 
     constructor() {
-        this.db = knex(config)
+        this.db = knex(knexconfig)
     }
 
     public async getAllHotels(): Promise<HotelsWithImage> {

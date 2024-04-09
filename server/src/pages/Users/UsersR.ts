@@ -9,7 +9,23 @@ export namespace UsersR{
         }
 
         export interface ResponseI {
-            "id"?: number 
+            "id"?: number,
+            "admin"?: number  
+        }
+
+    }
+
+    export namespace registration {
+        export const route = '/users/registration';
+
+        export interface RequestI {
+            "login": string,
+            "password": string
+        }
+
+        export interface ResponseI {
+            "id"?: number,
+            "admin"?: number 
         }
 
     }
