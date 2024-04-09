@@ -1,6 +1,7 @@
 export interface UserId {
 
     id?: number;
+    admin?: number
 }
 
 
