@@ -39,7 +39,7 @@ export class HotelsSQL {
                     .leftJoin({ ht: HotelTypesE.NAME }, 'ht.id', 'h.typeId')
                     .where('img.img_id', 0)
                     .andWhere('h.id', nId)
-                    .select('h.id', 'h.name', 'h.price', 'h.description','img.base64', 'food.feedName', 'ht.typeName', 'h.nearWater')
+                    .select('h.id', 'h.name', 'h.price', 'h.rating','h.description','img.base64', 'food.feedName', 'ht.typeName', 'h.nearWater')
                     .first(),
 
                 aServices: await this.db<Service>({ serv: ServiceE.NAME })

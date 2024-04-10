@@ -17,6 +17,7 @@ export interface hotelById {
         id?: number;
         name?: string;
         price?: number;
+        rating?: number;
         description?: string;
         image?: string;
 
