@@ -1,6 +1,7 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { HotelsR as R } from './HotelsR';
 import { HotelsSQL } from "../../Infrastructure/Repository/HotelsSQL";
+import authMiddleware from '../../middleware/authMiddleware';
 
 const router = Router();
 
@@ -22,12 +23,12 @@ router.get(R.getById.route, async (req, res) => {
     res.json(response)
 });
 
-router.post(R.getLovedHotelByUserId.route, async (req, res) => {
+router.get(R.getLovedHotelByUserId.route, authMiddleware, async (req: Request, res: Response) => {
     const request = req.body as R.getLovedHotelByUserId.RequestI;
 
     let response: R.getLovedHotelByUserId.ResponseI = {};
 
-    response = await (new HotelsSQL).getLovedHotelByUserId(request.id);
+    response = await (new HotelsSQL).getLovedHotelByUserId(request.tokenId);
     
     res.json(response)
 });

@@ -3,6 +3,17 @@ import { UsersR as R } from './UsersR';
 import { UsersSQL } from "../../Infrastructure/Repository/UsersSQL";
 import { check, validationResult } from "express-validator";
 
+import { sign } from "jsonwebtoken";
+import { secretKey, lifetime } from "../../../config";
+function generateAccsessToken(tokenId?: number, tokenAdmin?: number){
+    const payload = {
+        tokenId,
+        tokenAdmin
+    }
+
+    return sign(payload, secretKey, {expiresIn: lifetime});
+}
+
 const router = Router();
 
 router.post(R.loginCheck.route, async (req, res) => {
@@ -17,12 +28,12 @@ router.post(R.loginCheck.route, async (req, res) => {
             }
             else{
                 const response = await sql.loginCheck(request.login, request.password);
-                res.json(response);
+                response?.id ? res.json({"token":generateAccsessToken(response.id, response.admin)}) : res.status(400).json({message: "Пароль неправильный"});
             }
 
     }catch(e){
         console.log(e);
-        res.status(400).json({message: "Login error"});
+        res.status(400).json({message: "Ошибка авторизации"});
     }
 });
 
@@ -47,14 +58,14 @@ router.post(R.registration.route, [
             }
             else{
                 const response = await sql.registration(request.login, request.password);
-                res.json(response);
+                response?.id ? res.json({"token":generateAccsessToken(response.id, response.admin)}) : res.status(400).json({message: "Непредвиденная ошибка"});
             }
         }
         
         
     }catch(e){
         console.log(e);
-        res.status(400).json({message: "Registartion error"});
+        res.status(400).json({message: "Ошибка регистрации"});
     }
 });
 

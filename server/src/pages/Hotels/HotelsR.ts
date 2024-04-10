@@ -4,7 +4,7 @@ export namespace HotelsR {
         export const route = '/hotel/getLovedByUserId';
 
         export interface RequestI {
-            id: number;
+            tokenId: number;
         }
 
         export interface ResponseI {
