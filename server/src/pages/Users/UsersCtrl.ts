@@ -58,7 +58,7 @@ router.post(R.registration.route, [
             }
             else{
                 const response = await sql.registration(request.login, request.password);
-                response.id ? res.json({"token":generateAccsessToken(response.id, response.admin)}) : res.status(400).json({message: "Непредвиденная ошибка"});
+                response?.id ? res.json({"token":generateAccsessToken(response.id, response.admin)}) : res.status(400).json({message: "Непредвиденная ошибка"});
             }
         }
         
