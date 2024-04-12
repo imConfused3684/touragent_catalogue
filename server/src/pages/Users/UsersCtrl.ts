@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { UsersR as R } from './UsersR';
 import { UsersSQL } from "../../Infrastructure/Repository/UsersSQL";
 import { check, validationResult } from "express-validator";
+import authMiddleware from '../../middleware/authMiddleware';
 
 import { sign } from "jsonwebtoken";
 import { secretKey, lifetime } from "../../../config";
@@ -67,6 +68,10 @@ router.post(R.registration.route, [
         console.log(e);
         res.status(400).json({message: "Ошибка регистрации"});
     }
+});
+
+router.get(R.tokencheck.route, authMiddleware, async (req: Request, res:Response) => {
+    res.json({adm: req.body.tokenAdmin});
 });
 
 export default router 

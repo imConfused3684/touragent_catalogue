@@ -4,7 +4,7 @@ import { verify } from "jsonwebtoken";
 
 export default function (req: Request, res: Response, next: Function) { 
     try{
-        const token = req.headers.authorization?.split(' ')[1];
+        const token = req.headers.authorization;
         if(!token){
             return res.status(403).json({message: "Пользователь не авторизован"});
         }
