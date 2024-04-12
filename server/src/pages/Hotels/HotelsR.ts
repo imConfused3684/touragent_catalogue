@@ -143,8 +143,8 @@ export namespace HotelsR {
             price: number,
             img: string,
             description: string,
-            typeId: number,
-            feedId: number,
+            hotelType: number,
+            food: number,
             nearWater: number,
             servs: Array<string>
         }

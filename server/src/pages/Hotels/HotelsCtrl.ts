@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { HotelsR as R } from './HotelsR';
 import { HotelsSQL } from "../../Infrastructure/Repository/HotelsSQL";
 import authMiddleware from '../../middleware/authMiddleware';
+import { maxprice } from "../../../config";
 
 const router = Router();
 
@@ -123,7 +124,10 @@ router.post(R.changefavourite.route, authMiddleware, async (req: Request, res: R
 router.post(R.add.route, authMiddleware, async (req: Request, res: Response) => {
     try{
         const request = req.body as R.add.RequestI;
-        if(request.tokenAdmin == 1){
+        if(request.price > maxprice){
+            res.status(400).json({message: "Введены неправильные данные"});
+        }
+        else if(request.tokenAdmin == 1){
             const sql = new HotelsSQL;
 
             await sql.add(
@@ -131,8 +135,8 @@ router.post(R.add.route, authMiddleware, async (req: Request, res: Response) => 
                           request.price,
                           request.img, 
                           request.description, 
-                          request.typeId, 
-                          request.feedId, 
+                          request.hotelType, 
+                          request.food, 
                           request.nearWater, 
                           request.servs
                         );
