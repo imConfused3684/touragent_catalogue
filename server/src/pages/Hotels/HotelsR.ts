@@ -109,7 +109,26 @@ export namespace HotelsR {
         export const route = '/hotel/rate';
 
         export interface RequestI {
-            id: string,
+            id: number,
+            tokenId: number,
+            flag: number
+        }
+    }
+
+    export namespace isfavourite {
+        export const route = '/hotel/isfavourite';
+
+        export interface RequestI {
+            id: number,
+            tokenId: number,
+        }
+    }
+ 
+    export namespace changefavourite {
+        export const route = '/hotel/changefavourite';
+
+        export interface RequestI {
+            id: number,
             tokenId: number,
             flag: number
         }

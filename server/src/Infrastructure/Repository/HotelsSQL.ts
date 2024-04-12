@@ -150,12 +150,24 @@ export class HotelsSQL {
         return vName;
     }
 
-    public async rateCount(nuId: number, nhId: number){
+    public async rateCount(nuId: number, nhId: number): Promise<number>{
         return (await this.db<UserId>({ rh: RatedHotelE.NAME }).where('rh.user_id', nuId).andWhere('rh.hotel_id', nhId).select('rh.user_id')).length;
     }
 
-    public async rate(nuId: number, nhId: number, flag:boolean) {
+    public async rate(nhId: number, nuId: number, flag:boolean) {
         await this.db.raw(`call changeRating(${nhId}, ${nuId}, ${flag ? 'true' : 'false'})`);
     }
 
+    public async isfavourite(nhId: number, nuId: number): Promise<number> {
+        return (await this.db<UserId>({ uh: UserHotelsE.NAME }).where('uh.user_id', nuId).andWhere('uh.hotel_id', nhId).select('uh.user_id')).length;
+    }
+
+    public async changeFavourite(nhId: number, nuId: number){
+        if((await this.isfavourite(nhId, nuId)) == 0){
+            await this.db.insert([{user_id: nuId, hotel_id: nhId}]).into(UserHotelsE.NAME);
+        }
+        else{
+            await this.db({ uh: UserHotelsE.NAME }).where('uh.user_id', nuId).andWhere('uh.hotel_id', nhId).delete();
+        }
+    }
 }

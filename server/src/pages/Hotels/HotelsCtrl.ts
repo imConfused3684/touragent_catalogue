@@ -74,24 +74,49 @@ router.get(R.search.route, async (req, res) => {
 
 router.post(R.rate.route, authMiddleware, async (req: Request, res: Response) => {
     try{
-        console.log(req.body);
-
         const request = req.body as R.rate.RequestI;
         const sql = new HotelsSQL;
-
-        console.log(request);
-        const userCount = await sql.rateCount(request.tokenId, Number(request.id));
+        const userCount = await sql.rateCount(request.tokenId, request.id);
 
         if(!(userCount == 0)){
-            return res.status(400).json({message: "Вы оже оценили этот отель"});
+            return res.status(400).json({message: "Вы уже оценили этот отель"});
         }
         else{
-            await sql.rate(Number(request.id), request.tokenId, Number(request.flag) == 1);
+            await sql.rate(request.id, request.tokenId, request.flag == 1);
         }
+
+        res.json("ok");
 
     }catch(e){
         console.log(e);
         res.status(400).json({message: "Ошибка добавления оценки"});
+    }
+});
+
+router.post(R.isfavourite.route, authMiddleware, async (req: Request, res: Response) => {
+    try{
+        const request = req.body as R.isfavourite.RequestI;
+        const sql = new HotelsSQL;
+       
+        res.json({flag: await sql.isfavourite(request.id, request.tokenId)});
+    }catch(e){
+        console.log(e);
+        res.status(400).json({message: "Непредвиденная ошибка"});
+    }
+});
+
+router.post(R.changefavourite.route, authMiddleware, async (req: Request, res: Response) => {
+    try{
+        const request = req.body as R.changefavourite.RequestI;
+        const sql = new HotelsSQL;
+
+        await sql.changeFavourite(request.id, request.tokenId);
+
+        res.json("ok");
+
+    }catch(e){
+        console.log(e);
+        res.status(400).json({message: "Ошибка изменения избранного"});
     }
 });
 
