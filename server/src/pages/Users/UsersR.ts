@@ -30,4 +30,8 @@ export namespace UsersR{
 
     }
 
+    export namespace tokencheck {
+        export const route = '/users/tokencheck';
+    }
+
 }

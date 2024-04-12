@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { HotelsR as R } from './HotelsR';
 import { HotelsSQL } from "../../Infrastructure/Repository/HotelsSQL";
 import authMiddleware from '../../middleware/authMiddleware';
+import { maxprice } from "../../../config";
 
 const router = Router();
 
@@ -117,6 +118,38 @@ router.post(R.changefavourite.route, authMiddleware, async (req: Request, res: R
     }catch(e){
         console.log(e);
         res.status(400).json({message: "Ошибка изменения избранного"});
+    }
+});
+
+router.post(R.add.route, authMiddleware, async (req: Request, res: Response) => {
+    try{
+        const request = req.body as R.add.RequestI;
+        if(request.price > maxprice){
+            res.status(400).json({message: "Введены неправильные данные"});
+        }
+        else if(request.tokenAdmin == 1){
+            const sql = new HotelsSQL;
+
+            await sql.add(
+                          request.name, 
+                          request.price,
+                          request.img, 
+                          request.description, 
+                          request.hotelType, 
+                          request.food, 
+                          request.nearWater, 
+                          request.servs
+                        );
+
+            res.json({message: "Добавление успешно"});
+        }
+        else{
+            res.status(403).json({message: "У вас недостаточно прав"});
+        }
+
+    }catch(e){
+        console.log(e);
+        res.status(400).json({message: "Ошибка добавления"});
     }
 });
 

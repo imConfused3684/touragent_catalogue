@@ -130,8 +130,6 @@ export class HotelsSQL {
         } catch (e) {
             console.log('get all hotels witg imgs sql ERROR', e);
         }
-        //console.log("--------------------limit " + nLimit + " \n")
-        //console.log(vFilteredHotels)
 
         return vFilteredHotels;
     }
@@ -168,6 +166,41 @@ export class HotelsSQL {
         }
         else{
             await this.db({ uh: UserHotelsE.NAME }).where('uh.user_id', nuId).andWhere('uh.hotel_id', nhId).delete();
+        }
+    }
+
+    public async add(
+            name: string,
+            price: number,
+            img: string,
+            description: string,
+            typeId: number,
+            feedId: number,
+            nearWater: number,
+            servs: Array<string>)
+    {
+        const [hotelId] = await this.db.insert({
+            name: name,
+            price: price,
+            description: description,
+            typeId: typeId,
+            feedId: feedId,
+            nearWater: nearWater
+        }).into(HotelE.NAME);
+
+        await this.db.insert({
+            hotel_id: hotelId,
+            img_id: 0,
+            base64: img
+        }).into(ImageE.NAME);
+
+        for (let i = 0; i < servs.length; i++) {
+            await this.db.insert({
+                hotel_id: hotelId,
+                ser_id: i,
+                name: servs[i][0],
+                description: servs[i][1]
+            }).into(ServiceE.NAME);
         }
     }
 }
