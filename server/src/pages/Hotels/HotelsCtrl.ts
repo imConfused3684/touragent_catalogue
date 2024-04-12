@@ -72,4 +72,27 @@ router.get(R.search.route, async (req, res) => {
     res.json(response)
 });
 
+router.post(R.rate.route, authMiddleware, async (req: Request, res: Response) => {
+    try{
+        console.log(req.body);
+
+        const request = req.body as R.rate.RequestI;
+        const sql = new HotelsSQL;
+
+        console.log(request);
+        const userCount = await sql.rateCount(request.tokenId, Number(request.id));
+
+        if(!(userCount == 0)){
+            return res.status(400).json({message: "Вы оже оценили этот отель"});
+        }
+        else{
+            await sql.rate(Number(request.id), request.tokenId, Number(request.flag) == 1);
+        }
+
+    }catch(e){
+        console.log(e);
+        res.status(400).json({message: "Ошибка добавления оценки"});
+    }
+});
+
 export default router 

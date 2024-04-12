@@ -104,4 +104,14 @@ export namespace HotelsR {
             name?: string;
         }
     }
+
+    export namespace rate {
+        export const route = '/hotel/rate';
+
+        export interface RequestI {
+            id: string,
+            tokenId: number,
+            flag: number
+        }
+    }
 }

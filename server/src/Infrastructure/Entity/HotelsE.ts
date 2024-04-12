@@ -56,6 +56,14 @@ export interface SearchS {
     name?: string;
 }
 
+export interface UserId {
+    id?: number;
+}
+
+export class RatedHotelE {
+    public static NAME = 'userratedhotel';
+}
+
 export class HotelTypesE {
     public static NAME = 'hotetype';
 }
@@ -63,7 +71,6 @@ export class HotelTypesE {
 export class FoodTypesE {
     public static NAME = 'feeding';
 }
-
 
 export class UsersE {
     public static NAME = 'user';

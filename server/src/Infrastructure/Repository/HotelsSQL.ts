@@ -1,4 +1,4 @@
-import { HotelsWithImage, hotelById, Hotel, Service, Image, SearchS, HotelE, ImageE, ServiceE, UserHotelsE, FoodTypesE, HotelTypesE} from "../Entity/HotelsE";
+import { HotelsWithImage, hotelById, Hotel, Service, Image, SearchS, HotelE, ImageE, ServiceE, UserHotelsE, FoodTypesE, HotelTypesE, UserId, RatedHotelE} from "../Entity/HotelsE";
 import { knexconfig } from "../../../config";
 import knex, { Knex } from "knex";
 
@@ -148,6 +148,14 @@ export class HotelsSQL {
         }
 
         return vName;
+    }
+
+    public async rateCount(nuId: number, nhId: number){
+        return (await this.db<UserId>({ rh: RatedHotelE.NAME }).where('rh.user_id', nuId).andWhere('rh.hotel_id', nhId).select('rh.user_id')).length;
+    }
+
+    public async rate(nuId: number, nhId: number, flag:boolean) {
+        await this.db.raw(`call changeRating(${nhId}, ${nuId}, ${flag ? 'true' : 'false'})`);
     }
 
 }
