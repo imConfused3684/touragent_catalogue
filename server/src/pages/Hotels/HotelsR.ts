@@ -133,4 +133,20 @@ export namespace HotelsR {
             flag: number
         }
     }
+
+    export namespace add{
+        export const route = '/hotel/add';
+
+        export interface RequestI{
+            tokenAdmin:number,
+            name: string,
+            price: number,
+            img: string,
+            description: string,
+            typeId: number,
+            feedId: number,
+            nearWater: number,
+            servs: Array<string>
+        }
+    }
 }
