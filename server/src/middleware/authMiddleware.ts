@@ -8,8 +8,9 @@ export default function (req: Request, res: Response, next: Function) {
         if(!token){
             return res.status(403).json({message: "Пользователь не авторизован"});
         }
-        const decodedData = verify(token, secretKey);
-        req.body = decodedData;
+        const decodedData = verify(token, secretKey) as { tokenId: number; tokenAdmin:number };
+        req.body.tokenId = decodedData.tokenId;
+        req.body.tokenAdmin = decodedData.tokenAdmin;
         next();
     }
     catch(e){

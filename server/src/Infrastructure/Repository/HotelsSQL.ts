@@ -1,4 +1,4 @@
-import { HotelsWithImage, hotelById, Hotel, Service, Image, SearchS, HotelE, ImageE, ServiceE, UserHotelsE, FoodTypesE, HotelTypesE} from "../Entity/HotelsE";
+import { HotelsWithImage, hotelById, Hotel, Service, Image, SearchS, HotelE, ImageE, ServiceE, UserHotelsE, FoodTypesE, HotelTypesE, UserId, RatedHotelE} from "../Entity/HotelsE";
 import { knexconfig } from "../../../config";
 import knex, { Knex } from "knex";
 
@@ -39,7 +39,7 @@ export class HotelsSQL {
                     .leftJoin({ ht: HotelTypesE.NAME }, 'ht.id', 'h.typeId')
                     .where('img.img_id', 0)
                     .andWhere('h.id', nId)
-                    .select('h.id', 'h.name', 'h.price', 'h.description','img.base64', 'food.feedName', 'ht.typeName', 'h.nearWater')
+                    .select('h.id', 'h.name', 'h.price', 'h.rating','h.description','img.base64', 'food.feedName', 'ht.typeName', 'h.nearWater')
                     .first(),
 
                 aServices: await this.db<Service>({ serv: ServiceE.NAME })
@@ -150,4 +150,24 @@ export class HotelsSQL {
         return vName;
     }
 
+    public async rateCount(nuId: number, nhId: number): Promise<number>{
+        return (await this.db<UserId>({ rh: RatedHotelE.NAME }).where('rh.user_id', nuId).andWhere('rh.hotel_id', nhId).select('rh.user_id')).length;
+    }
+
+    public async rate(nhId: number, nuId: number, flag:boolean) {
+        await this.db.raw(`call changeRating(${nhId}, ${nuId}, ${flag ? 'true' : 'false'})`);
+    }
+
+    public async isfavourite(nhId: number, nuId: number): Promise<number> {
+        return (await this.db<UserId>({ uh: UserHotelsE.NAME }).where('uh.user_id', nuId).andWhere('uh.hotel_id', nhId).select('uh.user_id')).length;
+    }
+
+    public async changeFavourite(nhId: number, nuId: number){
+        if((await this.isfavourite(nhId, nuId)) == 0){
+            await this.db.insert([{user_id: nuId, hotel_id: nhId}]).into(UserHotelsE.NAME);
+        }
+        else{
+            await this.db({ uh: UserHotelsE.NAME }).where('uh.user_id', nuId).andWhere('uh.hotel_id', nhId).delete();
+        }
+    }
 }

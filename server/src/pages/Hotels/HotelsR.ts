@@ -54,6 +54,7 @@ export namespace HotelsR {
                 id?: number;
                 name?: string;
                 price?: number;
+                rating?: number;
                 description?: string;
                 image?: string;
                 
@@ -101,6 +102,35 @@ export namespace HotelsR {
 
         export interface ResponseI {
             name?: string;
+        }
+    }
+
+    export namespace rate {
+        export const route = '/hotel/rate';
+
+        export interface RequestI {
+            id: number,
+            tokenId: number,
+            flag: number
+        }
+    }
+
+    export namespace isfavourite {
+        export const route = '/hotel/isfavourite';
+
+        export interface RequestI {
+            id: number,
+            tokenId: number,
+        }
+    }
+ 
+    export namespace changefavourite {
+        export const route = '/hotel/changefavourite';
+
+        export interface RequestI {
+            id: number,
+            tokenId: number,
+            flag: number
         }
     }
 }
