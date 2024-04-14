@@ -6,7 +6,7 @@
   
   --border-radius: 20px;
 
-  --headerHeifght: 64px;
+  --headerHeight: 64px;
   --footerHeight: 155px;
   
 
@@ -28,5 +28,5 @@ html {
 }
 
 .body-container{
-  min-height: calc(100hv-var(--headerHeight)-var(--footerHeight));
+  min-height: calc(100hv-(var(--headerHeight)+var(--footerHeight)));
 }
