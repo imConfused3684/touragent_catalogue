@@ -1,0 +1,8 @@
+.outerWrapper{
+    background-color: var(--main-color);
+}
+
+.innerWrapper{
+    max-width: 1400px;
+    margin: 0 auto;
+}
