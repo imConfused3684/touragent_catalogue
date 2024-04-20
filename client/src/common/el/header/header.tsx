@@ -7,11 +7,9 @@ export default function Header() {
     return (
         <div className={styles.outerWrapper}>
             <div className={styles.innerWrapper}>
-                <div className={styles.logoContainer}>
-                    <NavLink to="/">
-                        <img src={logo} alt="logo" />
-                    </NavLink>
-                </div>
+                <NavLink to="/">
+                    <img className={styles.logo} src={logo} alt="logo" />
+                </NavLink>
 
                 <div className={styles.navBar}>
                     <NavLink to="/">Главная</NavLink>
