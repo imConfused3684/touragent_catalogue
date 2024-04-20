@@ -4,6 +4,30 @@
 
 .innerWrapper{
     height: var(--headerHeight);
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navBar{
+    width: 200px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.favico{
+    width: 35px;
+    height: 35px;
+    vertical-align: bottom;
+}
+
+.logo{
+    width: 139px;
+    height: 55px;
+    vertical-align: bottom;
 }
