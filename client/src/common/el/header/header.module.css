@@ -4,7 +4,7 @@
 
 .innerWrapper{
     height: var(--headerHeight);
-    max-width: 1200px;
+    max-width: var(--siteWidth);
     margin: 0 auto;
 
     display: flex;

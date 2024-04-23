@@ -8,6 +8,8 @@
 
   --headerHeight: 64px;
   --footerHeight: 120px;
+
+  --siteWidth: 1200px;
 }
 
 html {
@@ -29,5 +31,7 @@ html {
 }
 
 .body-container{
+  margin: 0 auto;
+  max-width: var(--siteWidth);
   min-height: calc(100vh - (var(--headerHeight) + var(--footerHeight)));
 }
