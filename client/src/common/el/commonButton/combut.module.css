@@ -1,0 +1,19 @@
+.button{
+    width: 225px;
+    height: 50px;
+
+    font-weight: 500;
+    color: var(--main-color);
+
+    background-color: var(--aux-color);
+    border-radius: 32px;
+    border: none;
+    cursor: pointer;
+}
+.button:hover{
+    box-shadow: 2px 2px 5px grey;
+    transition-duration: 100ms;
+  }
+.button:active{
+    box-shadow: -2px -2px 0px grey;
+}
