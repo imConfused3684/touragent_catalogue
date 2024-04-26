@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Finlandica:ital,wght@0,400..700;1,400..700&display=swap');
+
 #root {
   --aux-color: #C8DEFF;
   --main-color: #3C7CB6;
@@ -8,6 +10,8 @@
 
   --headerHeight: 64px;
   --footerHeight: 120px;
+
+  --siteWidth: 1200px;
 }
 
 html {
@@ -19,8 +23,12 @@ html {
   padding: 0;
 
   color: white;
+  font-family: "Finlandica", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   font-size: 20px;
   text-decoration: none;
+
 }
 
 .main-container {
@@ -29,5 +37,7 @@ html {
 }
 
 .body-container{
+  margin: 0 auto;
+  max-width: var(--siteWidth);
   min-height: calc(100vh - (var(--headerHeight) + var(--footerHeight)));
 }
