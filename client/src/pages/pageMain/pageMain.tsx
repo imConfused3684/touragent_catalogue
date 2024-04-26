@@ -14,9 +14,11 @@ import pointimg from "../../assets/checkblue.png"
 
 export default function Main() {
     const [sliderIndex, setsliderIndex] = useState<number>(0);
+    const [mobileFlag, setmobileFlag] = useState<boolean>(false);
 
     useEffect(()=>{
-        setInterval(() => {
+        setmobileFlag(window.innerHeight >= 900);
+        setTimeout(() => {
             setsliderIndex((sliderIndex + 1)%4);
           }, 4000);
     },[sliderIndex])
@@ -32,7 +34,7 @@ export default function Main() {
                 <img src={sliderIndex == 3 ? mainOcean : ""} alt="mainImage" />
             </div>
 
-            <div className={styles.points}>
+            <div className={mobileFlag ? styles.points : styles.pointsMobile}>
                 <div className={styles.point}>
                     <img src={pointimg}/>
                     <p>Заботимся о вашем комфорте <br/>и безопасности</p>
