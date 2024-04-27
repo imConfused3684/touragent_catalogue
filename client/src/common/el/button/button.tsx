@@ -1,4 +1,4 @@
-import styles from "./combut.module.css"
+import styles from "./button.module.css"
 
 interface ButtonProps{
     text: string;

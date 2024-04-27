@@ -5,6 +5,7 @@ import Header from './common/el/header/header';
 import Footer from './common/el/footer/footer';
 
 import Main from './pages/pageMain/pageMain';
+import Catalogue from './pages/pageCatalogue/pageCatalogue';
 
 function App() {
 return (
@@ -14,6 +15,7 @@ return (
       <div className="body-container">
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/catalogue" element={<Catalogue />} />
       </Routes>
       </div>
       

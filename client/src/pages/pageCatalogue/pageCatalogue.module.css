@@ -1,0 +1,52 @@
+.catalogueh1{
+    color: var(--main-color);
+    margin-top: 5vh;
+    font-size: 40px;
+}
+
+.filterPart{
+    width: 100%;
+}
+
+.filterRow{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 20px;
+
+    width: 100%;
+}
+
+.filterRow button{
+    width: 200px;
+    color: white;
+    background-color: var(--main-color);
+
+    height: 35px;
+    font-size: 20px;
+
+    border: none;
+    border-radius: 5px;
+}
+.filterRow button:hover{
+    filter:drop-shadow(5px 5px 5px var(--main-color));
+}
+.filterRow button:active{
+    background-color: #264f75;
+    filter: drop-shadow(5px 5px 5px var(--main-color));
+}
+
+.cardsPart{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    column-gap: 65px;
+    row-gap: 40px;
+    justify-content:center;
+    flex-wrap: wrap;
+}
+
+.moreButtonWrapper{
+    margin: 10% auto;
+}

@@ -1,0 +1,23 @@
+select{
+    height: 35px;
+    width: 200px;
+    font-size: 20px;
+
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.selectorMain{
+    color: var(--main-color)
+}
+.selectorMain option{
+    color: var(--main-color)
+}
+
+.selectorBlack{
+    color: var(--black)
+}
+.selectorBlack option{
+    color: var(--black)
+}
