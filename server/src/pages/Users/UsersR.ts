@@ -4,13 +4,13 @@ export namespace UsersR{
         export const route = '/users/loginCheck';
 
         export interface RequestI {
-            "login": string,
-            "password": string
+            login: string,
+            password: string
         }
 
         export interface ResponseI {
-            "id"?: number,
-            "admin"?: number  
+            id?: number,
+            admin?: number  
         }
 
     }
@@ -19,13 +19,13 @@ export namespace UsersR{
         export const route = '/users/registration';
 
         export interface RequestI {
-            "login": string,
-            "password": string
+            login: string,
+            password: string
         }
 
         export interface ResponseI {
-            "id"?: number,
-            "admin"?: number 
+            id?: number,
+            admin?: number 
         }
 
     }
