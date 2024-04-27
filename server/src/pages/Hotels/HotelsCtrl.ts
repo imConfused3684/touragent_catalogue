@@ -6,7 +6,7 @@ import { maxprice } from "../../../config";
 
 const router = Router();
 
-router.get(R.getAll.route, async (req, res) => {
+router.post(R.getAll.route, async (req, res) => {
     let response: R.getAll.ResponseI = {};
 
     response = await (new HotelsSQL).getAllHotels();
@@ -14,7 +14,7 @@ router.get(R.getAll.route, async (req, res) => {
     res.json(response)
 });
 
-router.get(R.getById.route, async (req, res) => {
+router.post(R.getById.route, async (req, res) => {
     const request = req.params as R.getById.RequestI;
 
     let response: R.getById.ResponseI = {};
@@ -24,7 +24,7 @@ router.get(R.getById.route, async (req, res) => {
     res.json(response)
 });
 
-router.get(R.getLovedHotelByUserId.route, authMiddleware, async (req: Request, res: Response) => {
+router.post(R.getLovedHotelByUserId.route, authMiddleware, async (req: Request, res: Response) => {
     const request = req.body as R.getLovedHotelByUserId.RequestI;
 
     let response: R.getLovedHotelByUserId.ResponseI = {};
@@ -63,7 +63,7 @@ router.post(R.getFiltered.route, async (req, res) => {
     res.json(response)
 });
 
-router.get(R.search.route, async (req, res) => {
+router.post(R.search.route, async (req, res) => {
     const request = req.params as R.search.RequestI;
 
     let response: R.search.ResponseI = {};

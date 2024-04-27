@@ -70,7 +70,7 @@ router.post(R.registration.route, [
     }
 });
 
-router.get(R.tokencheck.route, authMiddleware, async (req: Request, res:Response) => {
+router.post(R.tokencheck.route, authMiddleware, async (req: Request, res:Response) => {
     res.json({adm: req.body.tokenAdmin});
 });
 
