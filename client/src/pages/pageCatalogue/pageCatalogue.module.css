@@ -4,18 +4,12 @@
     font-size: 40px;
 }
 
-.filterPart{
-    width: 100%;
-}
-
 .filterRow{
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     margin-top: 20px;
-
-    width: 100%;
 }
 
 .filterRow button{
@@ -48,5 +42,6 @@
 }
 
 .moreButtonWrapper{
+    width: fit-content;
     margin: 10% auto;
 }

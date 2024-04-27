@@ -5,6 +5,6 @@ interface ButtonProps{
     func: () => void;
 }
 
-export default function RumButton({text, func}:ButtonProps) {
+export default function Button({text, func}:ButtonProps) {
     return (<button className={styles.button} onClick={func} >{text}</button>);
 }

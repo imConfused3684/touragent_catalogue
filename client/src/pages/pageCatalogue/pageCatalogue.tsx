@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import Button from "../../common/el/button/button"
 import Selector from "../../common/el/selector/selector"
+import WaterCheck from "../../common/el/checkbox/checkbox"
+import Searchbar from "./el/searchbar/searchbar"
 
 
 
@@ -12,6 +14,8 @@ export default function Catalogue() {
     const [feedTypeSelector, setFeedTypeSelector] = useState<string>("-1");
     const [sortSelector, setSortSelector] = useState<string>("-1");
     const [ratingSelector, setRatingSelector] = useState<string>("-1");
+    const [watercheck, setWatercheck] = useState<string>("0");
+    const [search, setSearch] = useState<string>("");
 
     return (
         <>
@@ -19,6 +23,9 @@ export default function Catalogue() {
 
             <div className={styles.filterPart}>
                 <div className={styles.filterRow}>
+
+                    <Searchbar valueHook={setSearch}/>
+
                     <Selector 
                         colorFlag={true} 
                         options={[
@@ -68,6 +75,9 @@ export default function Catalogue() {
                         ]}
                         stateHookFunc={setRatingSelector}
                     />
+
+                    <WaterCheck text="У воды" func={setWatercheck}/>
+                    <button onClick={()=>{}}>Применить</button>
                 </div>
             </div>
 
@@ -100,7 +110,7 @@ export default function Catalogue() {
                     
             </div>
             <div className={styles.moreButtonWrapper}>
-                    <Button text="Показать больше" func={()=>{alert(typeSelector + feedTypeSelector + sortSelector + ratingSelector)}}/>
+                    <Button text="Показать больше" func={()=>{alert(search)}}/>
             </div>
         </>
     );
