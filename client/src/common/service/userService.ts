@@ -1,4 +1,4 @@
-import FetchData from "./serviceDataFetch";
+import FetchData from "./dataFetchService";
 
 export async function loginCheck(login: string, password: string)
 {

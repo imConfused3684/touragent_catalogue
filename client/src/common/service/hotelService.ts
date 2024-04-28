@@ -1,4 +1,4 @@
-import FetchData from "./serviceDataFetch";
+import FetchData from "./dataFetchService";
 
 export async function getAll() {
     const response = await FetchData("", "/hotel/getAll", {});
@@ -40,7 +40,7 @@ export async function getFiltered(hotelTName: string, hotelType: number, food: n
     return response;
 }
 
-export async function search(name: string) {
+export async function search(name: string): Promise<{name: string}[]> {
     const response = await FetchData("", `/hotel/search/${name}`, {});
 
     return response;
