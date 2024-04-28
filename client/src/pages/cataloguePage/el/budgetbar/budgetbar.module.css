@@ -16,10 +16,10 @@
     color: var(--main-color);
 }
 .slider{
-    width: 55%;
+    width: calc(93% - 141px);
     position: absolute;
     top: 30%;
-    left: 27%;
+    left: 105px;
 }
 .budget > p{
     position: absolute;

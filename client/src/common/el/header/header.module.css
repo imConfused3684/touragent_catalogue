@@ -11,17 +11,18 @@
     justify-content: space-between;
     align-items: center;
 }
-@media (max-width: 1200px){
+@media (max-width: 1210px){
     .innerWrapper{
       padding: 0 10px;
     }
 }
 
 .navBar{
-    width: 200px;
+    max-width: 200px;
 
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    column-gap: 25px;
     align-items: center;
 }
 
