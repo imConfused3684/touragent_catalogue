@@ -9,7 +9,7 @@ import Catalogue from './pages/cataloguePage/cataloguePage';
 
 function App() {
 return (
-    <div className="main-container">Ц
+    <div className="main-container">
       <Header />
 
       <div className="body-container">
