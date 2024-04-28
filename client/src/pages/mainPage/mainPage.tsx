@@ -1,4 +1,4 @@
-import styles from "./pageMain.module.css";
+import styles from "./mainPage.module.css";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 

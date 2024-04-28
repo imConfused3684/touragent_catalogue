@@ -1,4 +1,4 @@
-import styles from "./pageCatalogue.module.css";
+import styles from "./cataloguePage.module.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 

@@ -1,30 +1,31 @@
 import FetchData from "./dataFetchService";
+import { CatalogueCard, Hotel, FavouriteCard, Image, SearchList } from "../interface/hotelInterface"
 
-export async function getAll() {
+export async function getAll(): Promise<CatalogueCard[]> {
     const response = await FetchData("", "/hotel/getAll", {});
 
     return response;
 }
 
-export async function getById(id: number) {
+export async function getById(id: number): Promise<Hotel> {
     const response = await FetchData("", `/hotel/getById/${id}`, {});
 
     return response;
 }
 
-export async function getLovedHotelByUserId(token: string) {
+export async function getLovedHotelByUserId(token: string): Promise<FavouriteCard[]> {
     const response = await FetchData(token, "/hotel/getLovedByUserId", {});
 
     return response;
 }
 
-export async function getImage(id: number) {
+export async function getImage(id: number): Promise<Image[]> {
     const response = await FetchData("", "/hotel/image", {"id": id});
 
     return response;
 }
 
-export async function getFiltered(hotelTName: string, hotelType: number, food: number, sort: number, budget: number, rating: number, nearWater: number, limit: number) {
+export async function getFiltered(hotelTName: string, hotelType: number, food: number, sort: number, budget: number, rating: number, nearWater: number, limit: number): Promise<CatalogueCard[]> {
     const response = await FetchData("", "/hotel/getFiltered", 
         {
             "hotelTName": hotelTName,
@@ -40,7 +41,7 @@ export async function getFiltered(hotelTName: string, hotelType: number, food: n
     return response;
 }
 
-export async function search(name: string): Promise<{name: string}[]> {
+export async function search(name: string): Promise<SearchList[]> {
     const response = await FetchData("", `/hotel/search/${name}`, {});
 
     return response;
