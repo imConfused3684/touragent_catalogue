@@ -1,5 +1,5 @@
 import FetchData from "./dataFetchService";
-import { CatalogueCard, Hotel, FavouriteCard, Image, SearchList } from "../interface/hotelInterface"
+import { CatalogueCard, Hotel, FavouriteCard, Image, SearchList, FavFlag, AddResponse } from "../interface/hotelInterface"
 
 export async function getAll(): Promise<CatalogueCard[]> {
     const response = await FetchData("", "/hotel/getAll", {});
@@ -47,19 +47,25 @@ export async function search(name: string): Promise<SearchList[]> {
     return response;
 }
 
-export async function rate(token: string ,id: number, flag: number) {
+export async function rate(token: string ,id: number, flag: number):Promise<string> {
     const response = await FetchData(token, "/hotel/rate", {"id": id, "flag": flag});
 
     return response;
 }
 
-export async function isfavourite(token: string ,id: number) {
+export async function isfavourite(token: string ,id: number):Promise<FavFlag> {
     const response = await FetchData(token, "/hotel/isfavourite", {"id": id});
 
     return response;
 }
 
-export async function changefavourite(token: string , 
+export async function changefavourite(token: string ,id: number, flag: number):Promise<string> {
+    const response = await FetchData(token, "/hotel/changefavourite", {"id": id, "flag": flag});
+
+    return response;
+}
+
+export async function add(token: string , 
         name: string,
         price: number,
         img: string,
@@ -68,7 +74,7 @@ export async function changefavourite(token: string ,
         food: number,
         nearWater: number,
         servs: Array<string>
-    ) {
+    ):Promise<AddResponse> {
     const response = await FetchData(token, "/hotel/add", 
         {
             "name": name,

@@ -5,13 +5,13 @@ type option = {
     name: string;
 }
 
-interface ButtonProps{
+interface Props{
     colorFlag: boolean;
     options: option[];
     stateHookFunc: (s: string) => void;
 }
 
-export default function Selector({colorFlag, options, stateHookFunc}:ButtonProps) {
+export default function Selector({colorFlag, options, stateHookFunc}:Props) {
     return (
         <select defaultValue={options[0].value} onChange={(e) => stateHookFunc(e.target.value)} className={colorFlag ? styles.selectorMain : styles.selectorBlack}>
             {

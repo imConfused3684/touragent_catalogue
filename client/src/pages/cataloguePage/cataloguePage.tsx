@@ -6,6 +6,7 @@ import Button from "../../common/el/button/button"
 import Selector from "../../common/el/selector/selector"
 import WaterCheck from "../../common/el/checkbox/checkbox"
 import Searchbar from "./el/searchbar/searchbar"
+import BudgetBar from "./el/budgetbar/budgetbar"
 
 
 
@@ -16,6 +17,7 @@ export default function Catalogue() {
     const [ratingSelector, setRatingSelector] = useState<string>("-1");
     const [watercheck, setWatercheck] = useState<string>("0");
     const [search, setSearch] = useState<string>("");
+    const [budget, setBudget] = useState<number>(1000);
 
     return (
         <>
@@ -63,6 +65,8 @@ export default function Catalogue() {
                     />
                 </div>
                 <div className={styles.filterRow}>
+                    <BudgetBar value={budget} valueHook={setBudget}/>
+
                     <Selector 
                         colorFlag={true} 
                         options={[
@@ -110,7 +114,7 @@ export default function Catalogue() {
                     
             </div>
             <div className={styles.moreButtonWrapper}>
-                    <Button text="Показать больше" func={()=>{alert(search)}}/>
+                    <Button text="Показать больше" func={()=>{alert(budget)}}/>
             </div>
         </>
     );

@@ -1,0 +1,32 @@
+.budget{
+    height: 35px;
+    width: 400px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+
+    color: var(--main-color);
+}
+.slider{
+    width: 55%;
+    position: absolute;
+    top: 30%;
+    left: 27%;
+}
+.budget > p{
+    position: absolute;
+    top: 17%;
+    color: var(--main-color);
+    height: 35px;
+}
+.value{
+    right: 5px;
+}

@@ -43,3 +43,11 @@ export interface Image{
 export interface SearchList{
     name: string
 }
+
+export interface FavFlag{
+    flag: number
+}
+
+export interface AddResponse{
+    message: string
+}

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./searchbar.module.css"
 import { search } from "../../../../common/service/hotelService"
 
-interface ButtonProps{
+interface Props{
     valueHook: (s: string) => void;
 }
 
@@ -13,9 +13,8 @@ async function getList(s: string): Promise<string[]>{
     return jsonlist.map(obj => obj.name);
 }
 
-export default function SearchBar({valueHook}:ButtonProps) {
+export default function SearchBar({valueHook}:Props) {
     const [searchOptions, setSearchOptions] = useState<string[]>([]);
-    useEffect(()=>{}, [searchOptions]);
 
     return (
         <>
