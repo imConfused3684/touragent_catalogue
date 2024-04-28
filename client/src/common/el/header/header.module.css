@@ -11,6 +11,11 @@
     justify-content: space-between;
     align-items: center;
 }
+@media (max-width: 1200px){
+    .innerWrapper{
+      padding: 0 10px;
+    }
+}
 
 .navBar{
     width: 200px;
