@@ -1,5 +1,4 @@
 import styles from "./cataloguePage.module.css";
-import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
 import Button from "../../common/el/button/button"
@@ -114,7 +113,7 @@ export default function Catalogue() {
                     
             </div>
             <div className={styles.moreButtonWrapper}>
-                    <Button text="Показать больше" func={()=>{alert(budget)}}/>
+                    <Button text="Показать больше" func={()=>{}}/>
             </div>
         </>
     );

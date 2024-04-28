@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styles from "./budgetbar.module.css"
 
 interface Props{
