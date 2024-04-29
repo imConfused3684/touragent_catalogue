@@ -1,14 +1,13 @@
 import styles from "./cataloguePage.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "../../common/el/button/button"
 import Selector from "../../common/el/selector/selector"
 import WaterCheck from "../../common/el/checkbox/checkbox"
 import Searchbar from "./el/searchbar/searchbar"
 import BudgetBar from "./el/budgetbar/budgetbar"
-
-import Modal from "./el/modal/modal";
-import { getById, isfavourite } from "../../common/service/hotelService";
+import { getAll } from "../../common/service/hotelService";
+import Card from "./el/catalogCard/card";
 
 export default function Catalogue() {
     const [typeSelector, setTypeSelector] = useState<string>("-1");
@@ -19,24 +18,12 @@ export default function Catalogue() {
     const [search, setSearch] = useState<string>("");
     const [budget, setBudget] = useState<number>(1000);
 
-    //will be in card element
-    {
-        const ref = useRef<HTMLDialogElement>(null);
-
-        async function modal(id: number):Promise<React.ReactElement>{
-            const hotel = (await getById(id)).aHotel;
-
-            const token = localStorage.getItem('travelToken');
-            const isfav: number = token ? (await isfavourite(token, id)).flag : -1;
-
-            return <Modal hotel={hotel} isFavourite={isfav} modalref={ref}  />
-        }
-
-        const [mod, setMod] = useState<React.ReactElement>(<></>);
-        useEffect(()=>{
-            modal(10).then((modal)=>{setMod(modal)})
-        }, []);
-    }
+    const [cards, setCards] = useState<React.ReactElement>(<div style={{color: "var(--main-color)", fontSize: "30px"}}>Данные загружаются</div>);
+    useEffect(()=>{
+        getAll().then((data)=>{setCards(<>{ 
+            data.map((card, index)=>{return <Card key={index} data={card} />})
+        }</>)})
+    },[])
 
     return (
         <>
@@ -105,31 +92,9 @@ export default function Catalogue() {
             </div>
 
             <div className={styles.cardsPart}>
-                    <Selector 
-                        colorFlag={true} 
-                        options={[{value:"-1", name:"test"}]}
-                        stateHookFunc={setTypeSelector}
-                    />
-                    <Selector 
-                        colorFlag={true} 
-                        options={[{value:"-1", name:"test"}]}
-                        stateHookFunc={setTypeSelector}
-                    />
-                    <Selector 
-                        colorFlag={true} 
-                        options={[{value:"-1", name:"test"}]}
-                        stateHookFunc={setTypeSelector}
-                    />
-                    <Selector 
-                        colorFlag={true} 
-                        options={[{value:"-1", name:"test"}]}
-                        stateHookFunc={setTypeSelector}
-                    />
-                    <Selector 
-                        colorFlag={true} 
-                        options={[{value:"-1", name:"test"}]}
-                        stateHookFunc={setTypeSelector}
-                    />
+            {
+                cards
+            }
                     
             </div>
             <div className={styles.moreButtonWrapper}>
