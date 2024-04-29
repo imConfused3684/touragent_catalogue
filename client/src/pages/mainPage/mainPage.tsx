@@ -1,8 +1,8 @@
-import styles from "./pageMain.module.css";
+import styles from "./mainPage.module.css";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import Button from "../../common/el/commonButton/combut"
+import Button from "../../common/el/button/button"
 
 import mainOcean from "../../assets/mainOcean.jpg"
 import mainRocks from "../../assets/mainRocks.jpg"
@@ -17,7 +17,7 @@ export default function Main() {
     const [mobileFlag, setmobileFlag] = useState<boolean>(false);
 
     useEffect(()=>{
-        setmobileFlag(window.innerHeight >= 900);
+        setmobileFlag(window.innerWidth >= 500);
         setTimeout(() => {
             setsliderIndex((sliderIndex + 1)%4);
           }, 4000);
@@ -25,7 +25,7 @@ export default function Main() {
 
     return (
         <div className={styles.wrapper}>
-            <h1>Traveling Around</h1>
+            <h1 className={styles.mainh1}>Traveling Around</h1>
 
             <div className={styles.adimg}>
                 <img src={sliderIndex == 0 ? mainTurtle : ""} alt="mainImage" />

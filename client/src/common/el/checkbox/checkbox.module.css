@@ -1,0 +1,23 @@
+.checkdiv{
+    color: var(--main-color);
+    height: 33px;
+    width: 193.4px;
+    font-size: 20px;
+
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    padding-left: 5px;
+}
+
+.checkdiv > input{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: 10px;
+}

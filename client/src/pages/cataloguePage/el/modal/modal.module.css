@@ -1,0 +1,115 @@
+dialog{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    border: none;
+
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 50%);
+    
+    z-index: 9999;
+}
+
+@keyframes popup {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+}
+
+.modal {
+    border-style: solid;
+    border-radius: var(--border-radius);
+    border-width: 3px;
+    border-color: var(--aux-color);
+    background-color: var(--main-color); 
+    
+    width: 700px;
+    min-height: fit-content;
+    
+    padding: 20px;
+
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+
+    animation: popup 0.3s;
+}
+
+.UpMod{
+    display: flex;
+    align-items: center;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    cursor: pointer;
+    font-size: 40px;
+    color: #C8DEFF;
+}
+
+.other > p,
+.infoDiv > p{
+    color: #C8DEFF;
+    font-size: 20px;
+    font-weight: 500;
+
+    display: block;
+}
+
+.bigguy{
+    width: 300px;
+    height: 200px;
+    object-fit: fill;
+
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 3px;
+    border-color: #C8DEFF;
+}
+
+.infoDiv{
+    display: inline-block;
+    margin-left: 25px;
+
+    max-width: calc(100% - 340px);
+}
+.infoDiv > h2{
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    text-overflow: ellipsis;
+
+    font-size: 25px;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.lovedornot{
+    position: relative;
+    right: -643px;
+    top: -15px;
+    display: block;
+}
+.modal button{
+    left: 0px;
+}
+
+.bDiv{
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.buttonWrapper{
+    width: fit-content;
+    margin: 0 auto;
+}

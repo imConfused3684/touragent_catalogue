@@ -18,7 +18,7 @@ export class HotelsSQL {
                 .where('img.img_id', 0)
                 .limit(3)
                 .offset(0)
-                .select('h.id', 'h.name', 'h.price','img.base64');
+                .select('h.id', 'h.name', 'h.price', 'h.rating', 'img.base64');
         } catch (e) {
             console.log('get all hotels witg imgs sql ERROR', e);
         }
@@ -64,7 +64,7 @@ export class HotelsSQL {
                 .leftJoin({ img: ImageE.NAME }, 'img.hotel_id', 'h.id')
                 .where('img.img_id', 0)
                 .andWhere('use.user_id', nId)
-                .select('h.id', 'h.name', 'h.price', 'h.description','img.base64');
+                .select('h.id', 'h.name', 'h.price', 'h.rating', 'h.description','img.base64');
         } catch (e) {
             console.log('get all hotels witg imgs sql ERROR', e);
         }
@@ -99,6 +99,8 @@ export class HotelsSQL {
     ): Promise<HotelsWithImage> {
         let vFilteredHotels: HotelsWithImage = {};
 
+        console.log(nSort)
+
         try {
             vFilteredHotels = await this.db<HotelsWithImage>({ h: HotelE.NAME })
             .leftJoin({ img: ImageE.NAME }, 'img.hotel_id', 'h.id')
@@ -118,15 +120,10 @@ export class HotelsSQL {
                 if (nNearWater != 0) {
                     this.andWhere('h.nearWater', 1);
                 }
-                if (nSort == 1) {
-                    this.orderBy('h.price', 'desc');
-                }
-                if (nSort == 2) {
-                    this.orderBy('h.rating', 'desc');
-                }
             })
             .limit(3 + nLimit)
-            .select('h.id', 'h.name', 'h.price','img.base64');
+            .orderByRaw(`${nSort == -1 ? '' : nSort == 1 ? 'h.price desc' : 'h.rating desc'}`)
+            .select('h.id', 'h.name', 'h.price', 'h.rating', 'img.base64');
         } catch (e) {
             console.log('get all hotels witg imgs sql ERROR', e);
         }

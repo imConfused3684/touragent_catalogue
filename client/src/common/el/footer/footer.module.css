@@ -11,6 +11,11 @@
     justify-content: space-between;
     align-items: center;
 }
+@media (max-width: 1210px){
+    .innerWrapper{
+      padding: 0 10px;
+    }
+}
 
 .footerhalf{
     line-height: 1.3;
