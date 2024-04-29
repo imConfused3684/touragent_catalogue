@@ -1,6 +1,6 @@
 .catalogueh1{
     color: var(--main-color);
-    margin-top: 3.8%;
+    padding-top: 3.8%;
     font-size: 40px;
 }
 
@@ -33,7 +33,6 @@
 
 .cardsPart{
     margin-top: 30px;
-    margin-bottom: 30px;
     display: flex;
     column-gap: 65px;
     row-gap: 40px;
@@ -43,5 +42,5 @@
 
 .moreButtonWrapper{
     width: fit-content;
-    margin: 10% auto;
+    margin: 30px auto;
 }

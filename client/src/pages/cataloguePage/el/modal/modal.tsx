@@ -17,10 +17,10 @@ interface Props{
 }
 
 export default function Modal({hotel, isFavourite, modalref}:Props) {
-    const navigate = useNavigate();
+    const navigator = useNavigate();
 
     function gotoHotel(){
-        navigate(`/hotel/?id=${hotel.id}`);
+        navigator(`/hotel/?id=${hotel.id}`);
     }
 
     return (
@@ -41,7 +41,9 @@ export default function Modal({hotel, isFavourite, modalref}:Props) {
                     </div>
                     <div className={styles.other}>
                         <p style={{margin: "10px 0"}}>{hotel.description}</p>
-                        <Button text="Перейти" func={()=>gotoHotel()}/>
+                        <div className={styles.buttonWrapper}>
+                            <Button text="Перейти" func={()=>gotoHotel()}/>
+                        </div>
                         {
                             isFavourite == -1 ? null : <img className={styles.lovedornot}src={isFavourite == 0 ? notfav : fav} alt="lovedlike"/>
                         }

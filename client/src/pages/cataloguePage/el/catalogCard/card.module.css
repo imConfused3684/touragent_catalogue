@@ -41,7 +41,7 @@
     margin: 10px auto;
 }
 .infoWrapper{
-    width: 40%;
     display: flex;
-    justify-content: space-between;
+    column-gap: 30px;
+    margin: 0 auto;
 }

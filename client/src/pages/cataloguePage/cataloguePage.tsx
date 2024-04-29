@@ -6,24 +6,33 @@ import Selector from "../../common/el/selector/selector"
 import WaterCheck from "../../common/el/checkbox/checkbox"
 import Searchbar from "./el/searchbar/searchbar"
 import BudgetBar from "./el/budgetbar/budgetbar"
-import { getAll } from "../../common/service/hotelService";
+import { getAll, getFiltered } from "../../common/service/hotelService";
 import Card from "./el/catalogCard/card";
 
 export default function Catalogue() {
-    const [typeSelector, setTypeSelector] = useState<string>("-1");
-    const [feedTypeSelector, setFeedTypeSelector] = useState<string>("-1");
-    const [sortSelector, setSortSelector] = useState<string>("-1");
-    const [ratingSelector, setRatingSelector] = useState<string>("-1");
-    const [watercheck, setWatercheck] = useState<string>("0");
+    const [typeSelector, setTypeSelector] = useState<number>(-1);
+    const [foodTypeSelector, setFoodTypeSelector] = useState<number>(-1);
+    const [sortSelector, setSortSelector] = useState<number>(-1);
+    const [ratingSelector, setRatingSelector] = useState<number>(-1);
+    const [watercheck, setWatercheck] = useState<number>(0);
     const [search, setSearch] = useState<string>("");
     const [budget, setBudget] = useState<number>(1000);
+    const [limit, setLimit] = useState<number>(0);
 
     const [cards, setCards] = useState<React.ReactElement>(<div style={{color: "var(--main-color)", fontSize: "30px"}}>Данные загружаются</div>);
     useEffect(()=>{
         getAll().then((data)=>{setCards(<>{ 
             data.map((card, index)=>{return <Card key={index} data={card} />})
-        }</>)})
+        }</>)}).catch();
     },[])
+    
+    function filter(){
+        getFiltered(search, typeSelector, foodTypeSelector, sortSelector, budget, ratingSelector, watercheck, limit).then((data)=>{console.log(data); setCards(<>{ 
+            data.map((card, index)=>{return <Card key={index} data={card} />})
+        }</>)})
+    }
+
+    useEffect(()=>{filter()},[limit])
 
     return (
         <>
@@ -57,7 +66,7 @@ export default function Catalogue() {
                             {value:"3", name:"Завтрак, ужин"},
                             {value:"4", name:"Полное"}
                         ]}
-                        stateHookFunc={setFeedTypeSelector}
+                        stateHookFunc={setFoodTypeSelector}
                     />
 
                     <Selector 
@@ -87,18 +96,17 @@ export default function Catalogue() {
                     />
 
                     <WaterCheck text="У воды" func={setWatercheck}/>
-                    <button onClick={()=>{}}>Применить</button>
+                    <button onClick={filter}>Применить</button>
                 </div>
             </div>
 
             <div className={styles.cardsPart}>
-            {
-                cards
-            }
-                    
+                {
+                    cards
+                }
             </div>
             <div className={styles.moreButtonWrapper}>
-                    <Button text="Показать больше" func={()=>{}}/>
+                <Button text="Показать больше" func={()=>{setLimit(limit+3);}}/>
             </div>
         </>
     );
