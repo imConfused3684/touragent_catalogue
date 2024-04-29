@@ -1,5 +1,5 @@
 import styles from "./cataloguePage.module.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Button from "../../common/el/button/button"
 import Selector from "../../common/el/selector/selector"
@@ -7,7 +7,8 @@ import WaterCheck from "../../common/el/checkbox/checkbox"
 import Searchbar from "./el/searchbar/searchbar"
 import BudgetBar from "./el/budgetbar/budgetbar"
 
-
+import Modal from "./el/modal/modal";
+import { getById, isfavourite } from "../../common/service/hotelService";
 
 export default function Catalogue() {
     const [typeSelector, setTypeSelector] = useState<string>("-1");
@@ -17,6 +18,25 @@ export default function Catalogue() {
     const [watercheck, setWatercheck] = useState<string>("0");
     const [search, setSearch] = useState<string>("");
     const [budget, setBudget] = useState<number>(1000);
+
+    //will be in card element
+    {
+        const ref = useRef<HTMLDialogElement>(null);
+
+        async function modal(id: number):Promise<React.ReactElement>{
+            const hotel = (await getById(id)).aHotel;
+
+            const token = localStorage.getItem('travelToken');
+            const isfav: number = token ? (await isfavourite(token, id)).flag : -1;
+
+            return <Modal hotel={hotel} isFavourite={isfav} modalref={ref}  />
+        }
+
+        const [mod, setMod] = useState<React.ReactElement>(<></>);
+        useEffect(()=>{
+            modal(10).then((modal)=>{setMod(modal)})
+        }, []);
+    }
 
     return (
         <>
