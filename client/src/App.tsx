@@ -14,7 +14,7 @@ return (
 
       <div className="body-container">
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="*" element={<Main />} />
           <Route path="/catalogue" element={<Catalogue />} />
         </Routes>
       </div>
