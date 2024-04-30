@@ -1,11 +1,10 @@
 import {serverip, serverport} from "../../../config";
 
 export default async function dataFetch(needErrorAlert: boolean, token: string, route: string, data: { [key: string]: any; }) {
-    let response: any = {};
     let responseErrorFlag = false;
     
     try{
-        response = await fetch(`http://${serverip}:${serverport}${route}`, {
+        const response = await fetch(`http://${serverip}:${serverport}${route}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,5 +26,5 @@ export default async function dataFetch(needErrorAlert: boolean, token: string, 
         if(needErrorAlert) alert(responseErrorFlag ?  error : "Не удалось получить ответ от сервера");
     }
 
-    return response;
+    return {};
 }

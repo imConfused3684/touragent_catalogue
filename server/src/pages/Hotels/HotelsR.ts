@@ -131,8 +131,7 @@ export namespace HotelsR {
 
         export interface RequestI {
             id: number,
-            tokenId: number,
-            flag: number
+            tokenId: number
         }
     }
 

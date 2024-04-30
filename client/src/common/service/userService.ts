@@ -14,7 +14,7 @@ export async function registration(login: string, password: string)
     return response;
 }
 
-export async function tokencheck(token: string)
+export async function tokencheck(token: string):Promise<{adm: number}>
 {
     const response = await FetchData(false, token, "/users/tokencheck", {});
 
