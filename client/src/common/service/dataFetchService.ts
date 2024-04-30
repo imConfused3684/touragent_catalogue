@@ -20,11 +20,12 @@ export default async function dataFetch(needErrorAlert: boolean, token: string, 
             throw new Error(errorResponse.message);
         }
 
+        return response.json();
     }
     catch (error){
         console.log(error);
         if(needErrorAlert) alert(responseErrorFlag ?  error : "Не удалось получить ответ от сервера");
     }
 
-    return response.json();
+    return response;
 }

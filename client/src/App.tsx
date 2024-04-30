@@ -6,6 +6,7 @@ import Footer from './common/el/footer/footer';
 
 import Main from './pages/mainPage/mainPage';
 import Catalogue from './pages/cataloguePage/cataloguePage';
+import AuthPage from './pages/authPage/authPage';
 
 function App() {
 return (
@@ -16,6 +17,7 @@ return (
         <Routes>
           <Route path="*" element={<Main />} />
           <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/login" element={<AuthPage />} />
         </Routes>
       </div>
       
