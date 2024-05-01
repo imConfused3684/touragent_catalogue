@@ -7,17 +7,21 @@ import notfav from "../../assets/heartEmpty.svg"
 import upArr from "../../assets/arrUp.svg"
 import downArr from "../../assets/arrDown.svg"
 import { Hotel } from "../../common/interface/hotelInterface";
-import { changefavourite, getById, isfavourite } from "../../common/service/hotelService";
+import { changefavourite, getById, isfavourite, rate } from "../../common/service/hotelService";
 import { tokencheck } from "../../common/service/userService";
 import SeviceCard from "../../common/el/serviceCard/serviceCard";
 
 function MainInfo({hotel}:{hotel: Hotel["aHotel"]}){
     const [logged, setLogged] = useState<boolean>(false);
     const [favf, setFavf] = useState<boolean>(false);
+    const [rating, setrating] = useState<number>(hotel.rating);
     const token = localStorage.getItem('travelToken');
 
     function togglefav(){
         token ? changefavourite(token, hotel.id).then(()=>{setFavf(!favf)}) : alert("Пользователь не авторизован");
+    }
+    function toggleRate(flag: number){
+        token ? rate(token, hotel.id, flag).then(()=>{getById(hotel.id).then((response)=>{setrating(response["aHotel"].rating)})}) : alert("Пользователь не авторизован");
     }
 
     useEffect(()=>{
@@ -42,12 +46,12 @@ function MainInfo({hotel}:{hotel: Hotel["aHotel"]}){
                 <h1 className={styles.hotelh1}>{hotel.name}</h1>
                 <div className={styles.infoWrapper}>
                     <p className="price">1 сутки: {hotel.price}$</p>
-                    <p className="rating">Рейтинг: {hotel.rating}</p>
+                    <p className="rating">Рейтинг: {rating}</p>
                     {
                         logged ? 
                         <>
-                            <img onClick={togglefav} className={styles.arrow} src={upArr} alt="favup"/>
-                            <img onClick={togglefav} className={styles.arrow} src={downArr} alt="favdown"/>
+                            <img onClick={()=>toggleRate(1)} className={styles.arrow} src={upArr} alt="favup"/>
+                            <img onClick={()=>toggleRate(0)} className={styles.arrow} src={downArr} alt="favdown"/>
                         </>
                         : <></>
                     }
@@ -82,7 +86,7 @@ export default function HotelPage(){
                         description={(card.ser_id == 0 ? card.description + `\nТип:${data["aHotel"].typeName}\nПитание:${data["aHotel"].feedName}${data["aHotel"].nearWater == 1 ? '\nУ воды' : ''}` : card.description).split('\n')}
                     />
                 })
-            }</>)
+            }<hr /></>)
         });
     }, []);
 
