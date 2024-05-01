@@ -15,9 +15,10 @@ select{
     color: var(--main-color)
 }
 
-.selectorBlack{
-    color: var(--black)
+.selectorRed{
+    color: var(--main-color);
+    border: 1px solid var(--error-color);
 }
-.selectorBlack option{
-    color: var(--black)
+.selectorRed option{
+    color: var(--main-color)
 }

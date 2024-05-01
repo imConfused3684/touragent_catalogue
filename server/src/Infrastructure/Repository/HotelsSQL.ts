@@ -172,7 +172,11 @@ export class HotelsSQL {
             typeId: number,
             feedId: number,
             nearWater: number,
-            servs: Array<string>)
+            servs: {
+                ser_id: number,
+                name: string,
+                description: string
+            }[])
     {
         const [hotelId] = await this.db.insert({
             name: name,
@@ -192,9 +196,9 @@ export class HotelsSQL {
         for (let i = 0; i < servs.length; i++) {
             await this.db.insert({
                 hotel_id: hotelId,
-                ser_id: i,
-                name: servs[i][0],
-                description: servs[i][1]
+                ser_id: servs[i].ser_id,
+                name: servs[i].name,
+                description: servs[i].description
             }).into(ServiceE.NAME);
         }
     }
