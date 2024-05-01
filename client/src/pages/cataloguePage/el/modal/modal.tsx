@@ -1,4 +1,4 @@
-import { RefObject } from "react";
+import { RefObject, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./modal.module.css"
 import Button from "../../../../common/el/button/button";
@@ -7,6 +7,7 @@ import fav from "../../../../assets/heartFull.svg"
 import notfav from "../../../../assets/heartEmpty.svg"
 
 import { Hotel } from "../../../../common/interface/hotelInterface";
+import { changefavourite } from "../../../../common/service/hotelService";
 
 interface Props{
     hotel: Hotel["aHotel"];
@@ -17,10 +18,15 @@ interface Props{
 }
 
 export default function Modal({hotel, isFavourite, modalref}:Props) {
+    const [favf, setFavf] = useState<boolean>(isFavourite == 1);
     const navigator = useNavigate();
 
     function gotoHotel(){
         navigator(`/hotel/?id=${hotel.id}`);
+    }
+    function togglefav(){
+        let token = localStorage.getItem('travelToken');
+        token ? changefavourite(token, hotel.id).then((response)=>{console.log(response); setFavf(!favf)}) : alert("Пользователь не авторизован");
     }
 
     return (
@@ -45,7 +51,7 @@ export default function Modal({hotel, isFavourite, modalref}:Props) {
                             <Button text="Перейти" func={()=>gotoHotel()}/>
                         </div>
                         {
-                            isFavourite == -1 ? null : <img className={styles.lovedornot}src={isFavourite == 0 ? notfav : fav} alt="lovedlike"/>
+                            isFavourite != -1 ? <img onClick={togglefav} className={styles.lovedornot} src={favf ? fav : notfav} alt="favheart"/> : null
                         }
                     </div>
                 </div>

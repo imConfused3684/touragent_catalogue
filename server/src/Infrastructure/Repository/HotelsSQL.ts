@@ -99,8 +99,6 @@ export class HotelsSQL {
     ): Promise<HotelsWithImage> {
         let vFilteredHotels: HotelsWithImage = {};
 
-        console.log(nSort)
-
         try {
             vFilteredHotels = await this.db<HotelsWithImage>({ h: HotelE.NAME })
             .leftJoin({ img: ImageE.NAME }, 'img.hotel_id', 'h.id')
@@ -122,7 +120,7 @@ export class HotelsSQL {
                 }
             })
             .limit(3 + nLimit)
-            .orderByRaw(`${nSort == -1 ? '' : nSort == 1 ? 'h.price desc' : 'h.rating desc'}`)
+            .orderByRaw(`${nSort == 1 ? 'h.price desc' : nSort == 2 ? 'h.rating desc' : 'h.id asc'}`)
             .select('h.id', 'h.name', 'h.price', 'h.rating', 'img.base64');
         } catch (e) {
             console.log('get all hotels witg imgs sql ERROR', e);

@@ -59,8 +59,8 @@ export async function isfavourite(token: string ,id: number):Promise<FavFlag> {
     return response;
 }
 
-export async function changefavourite(token: string ,id: number, flag: number):Promise<string> {
-    const response = await FetchData(true, token, "/hotel/changefavourite", {"id": id, "flag": flag});
+export async function changefavourite(token: string ,id: number):Promise<string> {
+    const response = await FetchData(true, token, "/hotel/changefavourite", {"id": id});
 
     return response;
 }

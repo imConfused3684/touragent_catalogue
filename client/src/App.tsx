@@ -6,6 +6,9 @@ import Footer from './common/el/footer/footer';
 
 import Main from './pages/mainPage/mainPage';
 import Catalogue from './pages/cataloguePage/cataloguePage';
+import AuthPage from './pages/authPage/authPage';
+import FavouritesPage from './pages/favoritesPage/favourites';
+import RouteProtector from './RouteProtector';
 
 function App() {
 return (
@@ -14,8 +17,10 @@ return (
 
       <div className="body-container">
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="*" element={<Main />} />
           <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/login" element={<AuthPage />} />
+          <Route path="/favourite" element={<RouteProtector needProtection={<FavouritesPage />} />} />
         </Routes>
       </div>
       

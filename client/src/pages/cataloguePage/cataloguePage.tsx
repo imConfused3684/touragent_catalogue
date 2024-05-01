@@ -27,7 +27,7 @@ export default function Catalogue() {
     },[])
     
     function filter(){
-        getFiltered(search, typeSelector, foodTypeSelector, sortSelector, budget, ratingSelector, watercheck, limit).then((data)=>{console.log(data); setCards(<>{ 
+        getFiltered(search, typeSelector, foodTypeSelector, sortSelector, budget, ratingSelector, watercheck, limit).then((data)=>{setCards(<>{ 
             data.map((card, index)=>{return <Card key={index} data={card} />})
         }</>)})
     }

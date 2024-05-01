@@ -94,10 +94,9 @@ dialog{
 }
 
 .lovedornot{
-    position: relative;
-    right: -643px;
-    top: -15px;
-    display: block;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
 }
 .modal button{
     left: 0px;
@@ -113,3 +112,7 @@ dialog{
     width: fit-content;
     margin: 0 auto;
 }
+
+.lovedornot:hover {
+    cursor: pointer;
+  }

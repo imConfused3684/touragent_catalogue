@@ -11,8 +11,12 @@ export default function Card({data}:{data: CatalogueCard}){
     async function modal(id: number):Promise<React.ReactElement>{
         const hotel = (await getById(id)).aHotel;
 
+        let isfav: number = -1;
         const token = localStorage.getItem('travelToken');
-        const isfav: number = token ? (await isfavourite(token, id)).flag : -1;
+        if(token){
+            let flag = (await isfavourite(token, id)).flag;
+            flag !== undefined ? isfav = flag : localStorage.removeItem('travelToken');
+        }
 
         return <Modal hotel={hotel} isFavourite={isfav} modalref={ref}  />
     }
