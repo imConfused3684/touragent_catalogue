@@ -44,7 +44,7 @@ export default function FavouritesPage(){
 
     return(
         <div className={styles.outerWrapper}>
-            <h1 className={styles.favh1}>Понравившееся предложения</h1>
+            <h1 className={styles.favh1}>Понравившиеся предложения</h1>
             <div className={styles.buttonbox}>
                 <Button text="Выйти" func={signout} />
                 {

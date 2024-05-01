@@ -28,9 +28,17 @@ export default function Catalogue() {
     },[])
     
     function filter(){
-        getFiltered(search, typeSelector, foodTypeSelector, sortSelector, budget, ratingSelector, watercheck, limit).then((data)=>{setCards(<>{ 
-            data.map((card, index)=>{return <Card key={index} data={card} />})
-        }</>)})
+        getFiltered(search, typeSelector, foodTypeSelector, sortSelector, budget, ratingSelector, watercheck, limit)
+            .then((data)=>{
+                if(data.length > 0){
+                    setCards(<>{ data.map((card, index)=>{return <Card key={index} data={card} />})}</>);
+                    setShow(true);
+                }
+                else{
+                    setCards(<div style={{color: "var(--main-color)", fontSize: "30px", padding: "10vh 0"}}>Ничего не найдено</div>);
+                    setShow(false);
+                }
+            })
     }
 
     useEffect(()=>{filter()},[limit])
