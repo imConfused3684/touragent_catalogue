@@ -10,6 +10,7 @@ import AuthPage from './pages/authPage/authPage';
 import FavouritesPage from './pages/favoritesPage/favourites';
 import RouteProtector from './RouteProtector';
 import HotelPage from './pages/hotelPage/hotelPage';
+import AddPage from './pages/addPage/addPage';
 
 
 function App() {
@@ -22,8 +23,9 @@ return (
           <Route path="*" element={<Main />} />
           <Route path="/catalogue" element={<Catalogue />} />
           <Route path="/login" element={<AuthPage />} />
-          <Route path="/favourite" element={<RouteProtector needProtection={<FavouritesPage />} />} />
+          <Route path="/favourite" element={<RouteProtector needProtection={<FavouritesPage />} needAdminStatus={false}/>} />
           <Route path="/hotel/:id" element={<HotelPage />} />
+          <Route path="/add" element={<RouteProtector needProtection={<AddPage />} needAdminStatus={true}/>} />
         </Routes>
       </div>
       

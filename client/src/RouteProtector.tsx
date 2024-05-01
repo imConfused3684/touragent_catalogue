@@ -2,8 +2,14 @@ import { Navigate } from "react-router-dom";
 import { tokencheck } from "./common/service/userService";
 import { useEffect, useState } from "react";
 
-export default function RouteProtector({needProtection}:{needProtection: React.ReactElement}){
+interface Props{
+    needProtection: React.ReactElement;
+    needAdminStatus: boolean;
+}
+
+export default function RouteProtector({needProtection, needAdminStatus}:Props){
     const [auth, setAuth] = useState<boolean | null>(null);
+    const [adminStatus, setAdminStatus] = useState<boolean>(false);
 
     useEffect(()=>{
         const token = localStorage.getItem('travelToken');
@@ -14,6 +20,7 @@ export default function RouteProtector({needProtection}:{needProtection: React.R
                     setAuth(false);
                 }
                 else{
+                    setAdminStatus(response.adm == 1)
                     setAuth(true);
                 }
             });
@@ -25,7 +32,13 @@ export default function RouteProtector({needProtection}:{needProtection: React.R
 
     if(auth === null) return <></>;
     if(auth){
-        return needProtection;
+        if(needAdminStatus == true && adminStatus == false){
+            return <Navigate to="/" />;
+        }
+        else{
+            return needProtection;
+        }
+        
     }
     else{
         return <Navigate to="/login" />;
