@@ -73,7 +73,7 @@ export async function add(token: string ,
         hotelType: number,
         food: number,
         nearWater: number,
-        servs: Array<string>
+        servs: Hotel["aServices"]
     ):Promise<AddResponse> {
     const response = await FetchData(true, token, "/hotel/add", 
         {

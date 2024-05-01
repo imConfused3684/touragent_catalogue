@@ -66,7 +66,7 @@ export namespace HotelsR {
             }
 
             aServices?: {
-                id?: number;
+                ser_id?: number;
                 name?: string;
                 description?: string;
             }
@@ -147,7 +147,11 @@ export namespace HotelsR {
             hotelType: number,
             food: number,
             nearWater: number,
-            servs: Array<string>
+            servs: {
+                ser_id: number,
+                name: string,
+                description: string
+            }[]
         }
     }
 }

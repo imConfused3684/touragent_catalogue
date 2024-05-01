@@ -1,0 +1,143 @@
+@media (max-width: 1210px){
+    .outerWrapper{
+      padding: 0 10px;
+    }
+}
+
+.addh1{
+    color: var(--main-color);
+    font-size: 40px;
+}
+
+.outerWrapper{
+    position: relative;
+    padding-top: 3.8%;
+}
+
+.outerWrapper p,
+.outerWrapper h2,
+.outerWrapper input,
+.outerWrapper input::placeholder{
+ color: var(--main-color)
+}
+
+.outerWrapper input{
+    padding-left: 5px;
+    height: 35px;
+    font-size: 20px;
+
+    border: solid;
+    border-width: 1px;
+    border-radius: var(--border-radius);
+}
+
+.outerWrapper textarea{
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    min-width: calc(100% - 20px);
+    min-height: 100px;
+    padding: 0 10px;
+    color: var(--main-color);
+    border-color: var(--main-color);
+    border-radius: var(--border-radius);
+  }
+.outerWrapper textarea::placeholder{
+    color: var(--main-color)
+}
+
+.selectors{
+    margin: 3px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.viewimg{
+    margin-top: 10px;
+    width: 99.5%;
+    height: 500px;
+
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 3px;
+    border-color: var(--aux-color);
+}
+
+.inputWrapper{
+    position: relative;
+    margin: 25px 0;
+}
+
+.error{
+    position: absolute;
+    top: 60px;
+    color: var(--error-color); 
+}
+
+.buttonsWrapper{
+    padding-top: 3.8%;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    z-index: 9999;
+}
+
+.mainDiv{
+    margin: 6px 0;
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+.outerWrapper hr{
+    color: var(--main-color);
+    margin: 5px 0;
+}
+
+.mainDiv h2{
+    color: var(--main-color);
+    margin-left: 15px;
+    margin-top: 0;
+    position: absolute;
+    top: 8px;
+}
+
+.descriptiondiv{
+    display: inline-block;
+    margin-left: 500px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.infodiv{
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+.infodiv input{
+    width: 230px;
+    position: absolute;
+    top: 0;
+  }
+
+.servDescriptionWrapper{
+    display: inline-block;
+    margin-left: 500px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.servButtonWrapper{
+    position: absolute;
+    bottom: 3px;
+}
