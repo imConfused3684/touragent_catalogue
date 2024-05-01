@@ -1,0 +1,26 @@
+.favh1{
+    color: var(--main-color);
+    padding-top: 3.8%;
+    font-size: 40px;
+}
+
+.outerWrapper{
+    position: relative;
+}
+
+.buttonbox{
+    padding: 20px 0;
+    margin: 0 auto;
+    display: flex;
+    column-gap: 10px;
+    width: fit-content;
+}
+
+.cardbox{
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+    align-items: center;
+
+    margin-bottom: 40px;
+}
