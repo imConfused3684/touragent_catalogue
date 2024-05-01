@@ -10,7 +10,7 @@ import FavCard from "./el/favCard/card";
 export default function FavouritesPage(){
     const navigator = useNavigate();
     const[admin, setAdmin] = useState<boolean>(false);
-    const[cards, setcards] = useState<React.ReactElement>(<div style={{color: "var(--main-color)", fontSize: "30px"}}>Данные загружаются</div>);
+    const[cards, setcards] = useState<React.ReactElement>(<div style={{color: "var(--main-color)", fontSize: "30px", paddingTop: "20vh"}}>Данные загружаются</div>);
 
     useEffect(()=>{
         const token = localStorage.getItem('travelToken');
