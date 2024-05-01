@@ -12,7 +12,7 @@ export default function FavCard({hotel}:{hotel:FavouriteCard}){
     const navigator = useNavigate();
 
     function gotoHotel(){
-        navigator(`/hotel/?id=${hotel.id}`);
+        navigator(`/hotel/${hotel.id}`);
     }
     function togglefav(){
         let token = localStorage.getItem('travelToken');

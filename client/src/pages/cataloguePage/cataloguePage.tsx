@@ -19,11 +19,12 @@ export default function Catalogue() {
     const [budget, setBudget] = useState<number>(1000);
     const [limit, setLimit] = useState<number>(0);
 
-    const [cards, setCards] = useState<React.ReactElement>(<div style={{color: "var(--main-color)", fontSize: "30px"}}>Данные загружаются</div>);
+    const [cards, setCards] = useState<React.ReactElement>(<div style={{color: "var(--main-color)", fontSize: "30px", padding: "10vh 0"}}>Данные загружаются</div>);
+    const [show, setShow] = useState<boolean>(false);
     useEffect(()=>{
         getAll().then((data)=>{setCards(<>{ 
             data.map((card, index)=>{return <Card key={index} data={card} />})
-        }</>)}).catch();
+        }</>); setShow(true);}).catch();
     },[])
     
     function filter(){
@@ -106,7 +107,7 @@ export default function Catalogue() {
                 }
             </div>
             <div className={styles.moreButtonWrapper}>
-                <Button text="Показать больше" func={()=>{setLimit(limit+3);}}/>
+                {show ? <Button text="Показать больше" func={()=>{setLimit(limit+3);}}/> : <></>}
             </div>
         </>
     );

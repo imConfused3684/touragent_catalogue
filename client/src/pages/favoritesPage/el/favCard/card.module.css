@@ -41,7 +41,7 @@
 }
 
 .cardOther > p{
-    height: 170px;
+    max-height: 170px;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;

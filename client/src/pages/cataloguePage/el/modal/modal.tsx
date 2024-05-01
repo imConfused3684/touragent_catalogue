@@ -22,7 +22,7 @@ export default function Modal({hotel, isFavourite, modalref}:Props) {
     const navigator = useNavigate();
 
     function gotoHotel(){
-        navigator(`/hotel/?id=${hotel.id}`);
+        navigator(`/hotel/${hotel.id}`);
     }
     function togglefav(){
         let token = localStorage.getItem('travelToken');

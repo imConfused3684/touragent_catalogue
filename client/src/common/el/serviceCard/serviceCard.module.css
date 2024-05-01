@@ -1,0 +1,35 @@
+.outerWrapper{
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+.outerWrapper hr{
+    color: var(--main-color);
+    margin: 5px 0;
+}
+
+.outerWrapper h2{
+    color: var(--main-color);
+    margin-left: 15px;
+    margin-top: 0;
+    position: absolute;
+    top: 8px;
+}
+
+.descriptiondiv{
+    display: inline-block;
+    margin-left: 500px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.descriptiondiv > p{
+    color: var(--main-color);
+    font-size: 20px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    overflow-wrap: break-word;
+}
