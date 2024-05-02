@@ -135,7 +135,7 @@ export default function AddPage(){
     useEffect(()=>{
         const token = localStorage.getItem('travelToken');
         if(finalServs.length > 0 && token){
-            add(token, name, Number(price), image, description, typeSelector, foodTypeSelector, watercheck, finalServs);
+            add(token, name, Number(price), image, description, typeSelector, foodTypeSelector, watercheck, finalServs).then((response) => {alert(response.message); document.location.reload();});;
         }
     },[finalServs]);
 
