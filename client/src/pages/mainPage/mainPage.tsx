@@ -13,11 +13,14 @@ import pointimg from "../../assets/checkblue.png"
 
 
 export default function Main() {
+    const arr = [mainTurtle, mainPalms, mainRocks, mainOcean];
+    const [pic, setPic] = useState<string>(mainTurtle);
     const [sliderIndex, setsliderIndex] = useState<number>(0);
     const [mobileFlag, setmobileFlag] = useState<boolean>(false);
 
     useEffect(()=>{
         setmobileFlag(window.innerWidth >= 500);
+        setPic(arr[sliderIndex]);
         setTimeout(() => {
             setsliderIndex((sliderIndex + 1)%4);
           }, 4000);
@@ -28,10 +31,7 @@ export default function Main() {
             <h1 className={styles.mainh1}>Traveling Around</h1>
 
             <div className={styles.adimg}>
-                <img style={sliderIndex != 0 ? {display: "none"} : {}} src={mainTurtle} alt="mainImage" />
-                <img style={sliderIndex != 1 ? {display: "none"} : {}} src={mainPalms} alt="mainImage" />
-                <img style={sliderIndex != 2 ? {display: "none"} : {}} src={mainRocks} alt="mainImage" />
-                <img style={sliderIndex != 3 ? {display: "none"} : {}} src={mainOcean} alt="mainImage" />
+                <img src={pic} alt="mainImage" />
             </div>
 
             <div className={mobileFlag ? styles.points : styles.pointsMobile}>
