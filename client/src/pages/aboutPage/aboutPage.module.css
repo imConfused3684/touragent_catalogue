@@ -1,0 +1,50 @@
+@media (max-width: 1210px){
+    .outerWrapper{
+      padding: 0 10px;
+    }
+}
+
+.outerWrapper{
+    margin-top: 3.8%;
+}
+.outerWrapper p{
+    color: var(--main-color);
+    text-align: justify;
+    text-indent: 3vw;
+    margin: 15px 0;
+}
+.outerWrapper span{
+    color: var(--main-color);
+    font-weight: 700;
+}
+.outerWrapper img{
+    height: 400px;
+    width: 100%;
+    object-fit: fill;
+
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 3px;
+    border-color: var(--aux-color);
+}
+
+.abouth1{
+    color: var(--main-color);
+    font-size: 40px;
+}
+
+.question{
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.end{
+    padding: 30px 10%;
+    font-weight: 700;
+
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 3px;
+    border-color: var(--aux-color);
+}
+
