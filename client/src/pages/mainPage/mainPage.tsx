@@ -28,10 +28,10 @@ export default function Main() {
             <h1 className={styles.mainh1}>Traveling Around</h1>
 
             <div className={styles.adimg}>
-                <img src={sliderIndex == 0 ? mainTurtle : ""} alt="mainImage" />
-                <img src={sliderIndex == 1 ? mainPalms : ""} alt="mainImage" />
-                <img src={sliderIndex == 2 ? mainRocks : ""} alt="mainImage" />
-                <img src={sliderIndex == 3 ? mainOcean : ""} alt="mainImage" />
+                <img style={sliderIndex != 0 ? {display: "none"} : {}} src={mainTurtle} alt="mainImage" />
+                <img style={sliderIndex != 1 ? {display: "none"} : {}} src={mainPalms} alt="mainImage" />
+                <img style={sliderIndex != 2 ? {display: "none"} : {}} src={mainRocks} alt="mainImage" />
+                <img style={sliderIndex != 3 ? {display: "none"} : {}} src={mainOcean} alt="mainImage" />
             </div>
 
             <div className={mobileFlag ? styles.points : styles.pointsMobile}>
