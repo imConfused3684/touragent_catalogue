@@ -12,13 +12,18 @@ function ControlPanel({lists}:{lists:lists}){
     const navigator = useNavigate();
     const [user, setuser] = useState<number>(0);
     const [object, setobject] = useState<number>(0);
+    const [check, setCheck] = useState<boolean>(lists.aUsers[user].admin == 1);
+
+    useEffect(()=>{
+        setCheck(lists.aUsers[user].admin == 1);
+    },[user]);
 
     return (
         <>
             <hr/>
                 <div className={styles.panelWrapper}>
                     <Selector colorFlag={true} options={lists.aUsers.map((elem, i) =>{ return {value: i.toString(), name: elem.login}})} stateHookFunc={setuser}/>
-                    <CheckDiv value={lists.aUsers[user].admin == 1} text="Администратор" func={(flag: number)=>{console.log("user " + lists.aUsers[user].login + " admin: " + flag)}}/>
+                    <CheckDiv value={check} text="Администратор" func={(flag: number)=>{setCheck(flag == 1); console.log("user " + lists.aUsers[user].login + " admin: " + flag)}}/>
                     <Button text="Удалить" func={()=>{}} />
                 </div>
             <hr/>
