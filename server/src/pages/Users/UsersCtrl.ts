@@ -74,4 +74,19 @@ router.post(R.tokencheck.route, authMiddleware, async (req: Request, res:Respons
     res.json({adm: req.body.tokenAdmin});
 });
 
+router.post(R.lists.route, authMiddleware, async (req: Request, res: Response) => {
+    try{
+        
+        let response: R.lists.ResponseI = {};
+
+        response = await (new UsersSQL).getLists();
+        
+        res.json(response)
+
+    }catch(e){
+        console.log(e);
+        res.status(400).json({message: "Ошибка получения данных"});
+    }
+});
+
 export default router 

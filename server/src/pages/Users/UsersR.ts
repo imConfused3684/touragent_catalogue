@@ -34,4 +34,23 @@ export namespace UsersR{
         export const route = '/users/tokencheck';
     }
 
+    export namespace lists {
+        export const route = '/lists';
+
+        export interface ResponseI {
+            aObjects?: { 
+                id: number,
+                name: string,
+                price: number,
+                rating: number
+            }
+
+            aUsers?: { 
+                id: number,
+                login: string,
+                admin: number
+            }
+        }
+
+    }
 }

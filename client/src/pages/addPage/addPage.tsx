@@ -59,7 +59,6 @@ export default function AddPage(){
 
 
     useEffect(()=>{
-        console.log(id);
         if(id){
             getById(Number(id)).then((data)=>{
                 setHotel(data)

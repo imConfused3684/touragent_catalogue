@@ -1,3 +1,4 @@
+import { lists } from "../interface/userinterface";
 import FetchData from "./dataFetchService";
 
 export async function loginCheck(login: string, password: string)
@@ -17,6 +18,13 @@ export async function registration(login: string, password: string)
 export async function tokencheck(token: string):Promise<{adm: number}>
 {
     const response = await FetchData(false, token, "/users/tokencheck", {});
+
+    return response;
+}
+
+export async function getLists(token: string):Promise<lists>
+{
+    const response = await FetchData(true, token, "/lists", {});
 
     return response;
 }

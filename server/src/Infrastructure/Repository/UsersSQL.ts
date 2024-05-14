@@ -1,4 +1,4 @@
-import { UserId, UsersE} from "../Entity/UsersE";
+import { UserId, UsersE, Lists, HotelE, Hotel} from "../Entity/UsersE";
 import { knexconfig } from "../../../config";
 import knex, { Knex } from "knex";
 
@@ -49,5 +49,22 @@ export class UsersSQL {
         }
         
         return vUser;
+    }
+
+    public async getLists(): Promise<Lists> {
+        let lists: Lists = {};
+
+        try {
+            lists.aObjects = await this.db<Hotel>({ h: HotelE.NAME })
+            .select('h.id', 'h.name', 'h.price', 'h.rating');
+
+            lists.aUsers = await this.db<UserId>({ u: UsersE.NAME })
+            .select('u.id', 'u.login', 'u.admin');
+
+        } catch (e) {
+            console.log('get all hotels witg imgs sql ERROR', e);
+        }
+
+        return lists;
     }
 }

@@ -48,7 +48,7 @@ export default function FavouritesPage(){
             <div className={styles.buttonbox}>
                 <Button text="Выйти" func={signout} />
                 {
-                    admin ? <Button text="Добавить" func={()=>{navigator("/add")}} /> : null
+                    admin ? <Button text="Управление" func={()=>{navigator("/control")}} /> : null
                 }
             </div>
             <div className={styles.cardbox}>
