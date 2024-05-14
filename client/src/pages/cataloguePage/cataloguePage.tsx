@@ -55,7 +55,7 @@ export default function Catalogue() {
                     <Selector 
                         colorFlag={true} 
                         options={[
-                                {value:"-1", name:"Тип отеля"},
+                                {value:"-1", name:"Тип объекта"},
                                 {value:"-1", name:"Любой"},
                                 {value:"1", name:"Отель"},
                                 {value:"2", name:"Гостевой дом"},
