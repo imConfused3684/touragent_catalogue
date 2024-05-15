@@ -1,3 +1,8 @@
+export interface FilteredCards{
+    showmore?: number,
+    cards?: HotelsWithImage
+}
+
 export interface HotelsWithImage {
 
     id?: number;
