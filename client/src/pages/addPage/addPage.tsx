@@ -7,9 +7,26 @@ import Selector from "../../common/el/selector/selector";
 import WaterCheck from "../../common/el/checkbox/checkbox";
 import SeviceCard from "../../common/el/serviceCard/serviceCard";
 import { Hotel } from "../../common/interface/hotelInterface";
-import { add } from "../../common/service/hotelService";
+import { add, getById } from "../../common/service/hotelService";
+import { useParams } from "react-router-dom";
 
 export default function AddPage(){
+    const { id } = useParams();
+    const [hotel, setHotel] = useState<Hotel>({
+        aHotel: {
+            id: Number(id),
+            name: '',
+            price: 0,
+            rating: 0,
+            description: '',
+            base64: '',
+            feedName: '',
+            typeName: '',
+            nearWater: 0
+        },
+        aServices: []
+    });
+
     const picloaderRef = useRef<HTMLInputElement>(null);
     const servName = useRef<HTMLInputElement>(null);
     const servDesc = useRef<HTMLTextAreaElement>(null);
@@ -40,6 +57,16 @@ export default function AddPage(){
     const [address, setaddress] = useState<string>("");
     const [contact, setcontact] = useState<string>("");
 
+
+    useEffect(()=>{
+        if(id){
+            getById(Number(id)).then((data)=>{
+                console.log(data)
+                setHotel(data)
+                setaddedServs(data.aServices.slice(1, data.aServices.length))
+            })
+        }
+    },[]);
 
     useEffect(()=>{if(hoteltypeError) sethoteltypeError(false)},[typeSelector]);
     useEffect(()=>{if(hotelfoodError) sethotelfoodError(false)},[foodTypeSelector])
@@ -141,30 +168,30 @@ export default function AddPage(){
 
     return(
         <div className={styles.outerWrapper}>
-            <h1 className={styles.addh1}>Добавление позиции</h1>
+            <h1 className={styles.addh1}>{id ? "Изменение объекта" : "Добавление объекта"}</h1>
 
             <div className={styles.buttonsWrapper}>
-                <Button text="Готово" func={ready}/>
+                <Button text={id ? "Сохранить" : "Готово"} func={ready}/>
                 <Button text="Очистить" func={()=>{document.location.reload()}}/>
             </div>
 
             <div className={styles.inputWrapper}>
                 <p>Название (максимум 50 символов): </p>
-                <input onBlur={()=>{if(nameError) setNameError(false)}} onChange={(e)=>{setname(e.target.value)}} type="text" style={nameError ? {border: "1px solid var(--error-color)", width: "300px"} : {border: "1px solid var(--main-color)", width: "300px"}} placeholder="Название"/>
+                <input defaultValue={hotel.aHotel.name} onBlur={()=>{if(nameError) setNameError(false)}} onChange={(e)=>{setname(e.target.value)}} type="text" style={nameError ? {border: "1px solid var(--error-color)", width: "300px"} : {border: "1px solid var(--main-color)", width: "300px"}} placeholder="Название"/>
                 {nameError ? <div className={styles.error} >Непустая текстовая строка, не более 50 символов.</div> : null}
             </div>
 
             <div className={styles.inputWrapper}>
                 <p>Цена($): </p>
-                <input onBlur={()=>{if(priceError) setPriceError(false)}} onChange={(e)=>{setprice(e.target.value)}} type="text" style={priceError ? {border: "1px solid var(--error-color)", width: "300px"} : {border: "1px solid var(--main-color)", width: "300px"}} placeholder="Цена"/>
+                <input defaultValue={id ? hotel.aHotel.price : ''} onBlur={()=>{if(priceError) setPriceError(false)}} onChange={(e)=>{setprice(e.target.value)}} type="text" style={priceError ? {border: "1px solid var(--error-color)", width: "300px"} : {border: "1px solid var(--main-color)", width: "300px"}} placeholder="Цена"/>
                 {priceError ? <div className={styles.error} >Число от 0 до 1000.</div> : null}
             </div>
 
-            <Button text="Добавить изображение" func={addpicture}/>
+            <Button text={id ? "Изменить изображение" : "Добавить изображение"} func={addpicture}/>
             <input ref={picloaderRef} type="file" id="fileInput" style={{display: "none"}} onChange={handlePictureInput}/>
-            <img className={styles.viewimg} src={image} alt="preview"/>
+            <img className={styles.viewimg} src={ id? hotel.aHotel.base64 : image} alt="preview"/>
 
-            <textarea onBlur={()=>{if(descriptionError) setdescriptionError(false)}} onChange={(e)=>{setdescription(e.target.value)}} style={descriptionError ? {border: "1px solid var(--error-color)"} : {}} className={styles.description} rows={6} cols={40} placeholder="Введите описание"></textarea>
+            <textarea defaultValue={hotel.aHotel.description} onBlur={()=>{if(descriptionError) setdescriptionError(false)}} onChange={(e)=>{setdescription(e.target.value)}} style={descriptionError ? {border: "1px solid var(--error-color)"} : {}} className={styles.description} rows={6} cols={40} placeholder="Введите описание"></textarea>
 
             <hr/>
 
@@ -172,16 +199,16 @@ export default function AddPage(){
                 <h2>ОБЩАЯ ИНФОРМАЦИЯ</h2>
                 <div className={styles.descriptiondiv}>
                     <p>Расположение:</p>
-                    <input onBlur={()=>{if(addressError) setaddressError(false)}} onChange={(e)=>{setaddress(e.target.value)}} style={addressError ? {border: "1px solid var(--error-color)"} : {}} type="text" className="address" placeholder="Адрес"/>
+                    <input defaultValue={hotel.aServices[0] ? hotel.aServices[0].description.split('\n')[0].split(': ')[1] : ''} onBlur={()=>{if(addressError) setaddressError(false)}} onChange={(e)=>{setaddress(e.target.value)}} style={addressError ? {border: "1px solid var(--error-color)"} : {}} type="text" className="address" placeholder="Адрес"/>
                     <p>Контактная информация: </p>
-                    <input onBlur={()=>{if(contactError) setcontactError(false)}} onChange={(e)=>{setcontact(e.target.value)}} style={contactError ? {border: "1px solid var(--error-color)"} : {}} type="text" className="phone" placeholder="Например: почта"/>
+                    <input defaultValue={hotel.aServices[0] ? hotel.aServices[0].description.split('\n')[1].split(': ')[1] : ''} onBlur={()=>{if(contactError) setcontactError(false)}} onChange={(e)=>{setcontact(e.target.value)}} style={contactError ? {border: "1px solid var(--error-color)"} : {}} type="text" className="phone" placeholder="Например: почта"/>
                 </div>
             </div>
             <div className={styles.selectors}>
                 <Selector 
                     colorFlag={!hoteltypeError} 
                     options={[
-                            {value:"-1", name:"Тип отеля"},
+                            {value:"-1", name:"Тип объекта"},
                             {value:"1", name:"Отель"},
                             {value:"2", name:"Гостевой дом"},
                             {value:"3", name:"Апартаменты"},

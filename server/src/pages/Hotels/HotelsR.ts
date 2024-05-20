@@ -88,10 +88,14 @@ export namespace HotelsR {
         }
 
         export interface ResponseI {
-            id?: number;
-            name?: string;
-            price?: number;
-            image?: string;
+            showmore?: number,
+            cards?: {
+                id?: number;
+                name?: string;
+                price?: number;
+                image?: string;
+            }
+
         }
     }
 

@@ -1,4 +1,4 @@
-import { HotelsWithImage, hotelById, Hotel, Service, Image, SearchS, HotelE, ImageE, ServiceE, UserHotelsE, FoodTypesE, HotelTypesE, UserId, RatedHotelE} from "../Entity/HotelsE";
+import { HotelsWithImage, hotelById, Hotel, Service, Image, SearchS, HotelE, ImageE, ServiceE, UserHotelsE, FoodTypesE, HotelTypesE, UserId, RatedHotelE, FilteredCards} from "../Entity/HotelsE";
 import { knexconfig } from "../../../config";
 import knex, { Knex } from "knex";
 
@@ -96,8 +96,10 @@ export class HotelsSQL {
         nRating: number,
         nNearWater: number,
         nLimit: number
-    ): Promise<HotelsWithImage> {
+    ): Promise<FilteredCards> {
         let vFilteredHotels: HotelsWithImage = {};
+
+        let next;
 
         try {
             vFilteredHotels = await this.db<HotelsWithImage>({ h: HotelE.NAME })
@@ -119,14 +121,36 @@ export class HotelsSQL {
                     this.andWhere('h.nearWater', 1);
                 }
             })
-            .limit(3 + nLimit)
+            .offset(nLimit)
+            .limit(3)
             .orderByRaw(`${nSort == 1 ? 'h.price desc' : nSort == 2 ? 'h.rating desc' : 'h.id asc'}`)
             .select('h.id', 'h.name', 'h.price', 'h.rating', 'img.base64');
+
+            next = await this.db<HotelsWithImage>({ h: HotelE.NAME })
+            .leftJoin({ img: ImageE.NAME }, 'img.hotel_id', 'h.id')
+            .where('img.img_id', 0)
+            .andWhere('h.name', 'like', "%" + sHotelTName + "%")
+            .andWhere('h.price', '<=', nBudget)
+            .andWhere(function () {
+                if (nHotelType != -1) {
+                    this.andWhere('h.typeId', nHotelType);
+                }
+                if (nFood != -1) {
+                    this.andWhere('h.feedId', nFood);
+                }
+                if (nRating != -1) {
+                    this.andWhere('h.rating', '>=', nRating);
+                }
+                if (nNearWater != 0) {
+                    this.andWhere('h.nearWater', 1);
+                }
+            })
+            .count('* as count')
+            .first();
         } catch (e) {
             console.log('get all hotels witg imgs sql ERROR', e);
         }
-
-        return vFilteredHotels;
+        return {showmore: next ? Number(next.count) - nLimit - 3 : 0, cards: vFilteredHotels};
     }
 
     public async search(sHotelTName: string): Promise<SearchS> {

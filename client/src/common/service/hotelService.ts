@@ -1,5 +1,5 @@
 import FetchData from "./dataFetchService";
-import { CatalogueCard, Hotel, FavouriteCard, Image, SearchList, FavFlag, AddResponse } from "../interface/hotelInterface"
+import { CatalogueCard, Hotel, FavouriteCard, Image, SearchList, FavFlag, AddResponse, FilteredCard } from "../interface/hotelInterface"
 
 export async function getAll(): Promise<CatalogueCard[]> {
     const response = await FetchData(true, "", "/hotel/getAll", {});
@@ -25,7 +25,7 @@ export async function getImage(id: number): Promise<Image[]> {
     return response;
 }
 
-export async function getFiltered(hotelTName: string, hotelType: number, food: number, sort: number, budget: number, rating: number, nearWater: number, limit: number): Promise<CatalogueCard[]> {
+export async function getFiltered(hotelTName: string, hotelType: number, food: number, sort: number, budget: number, rating: number, nearWater: number, limit: number): Promise<FilteredCard> {
     const response = await FetchData(true, "", "/hotel/getFiltered", 
         {
             "hotelTName": hotelTName,

@@ -1,7 +1,31 @@
 export interface UserId {
 
     id?: number;
+    login?: string;
     admin?: number
+}
+
+export interface Lists{
+    aObjects?: { 
+        id: number,
+        name: string,
+        price: number,
+        rating: number
+    }
+
+    aUsers?: { 
+        id: number,
+        login: string,
+        admin: number
+    }
+}
+
+export interface Hotel {
+    id?: number;
+    name?: string;
+    price?: number;
+    description?: string;
+    image?: string;
 }
 
 

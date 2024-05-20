@@ -6,6 +6,11 @@ export interface CatalogueCard{
     base64: string
 }
 
+export interface FilteredCard{
+    showmore: number,
+    cards: CatalogueCard[]
+}
+
 export interface Hotel{
     aHotel: {
         id: number,

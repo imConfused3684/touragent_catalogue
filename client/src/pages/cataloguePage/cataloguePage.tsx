@@ -10,6 +10,8 @@ import { getAll, getFiltered } from "../../common/service/hotelService";
 import Card from "./el/catalogCard/card";
 
 export default function Catalogue() {
+    const plug: React.ReactElement = <div style={{color: "var(--main-color)", fontSize: "30px", padding: "10vh 0"}}>Данные загружаются</div>;
+
     const [typeSelector, setTypeSelector] = useState<number>(-1);
     const [foodTypeSelector, setFoodTypeSelector] = useState<number>(-1);
     const [sortSelector, setSortSelector] = useState<number>(-1);
@@ -19,20 +21,23 @@ export default function Catalogue() {
     const [budget, setBudget] = useState<number>(1000);
     const [limit, setLimit] = useState<number>(0);
 
-    const [cards, setCards] = useState<React.ReactElement>(<div style={{color: "var(--main-color)", fontSize: "30px", padding: "10vh 0"}}>Данные загружаются</div>);
+    const [cards, setCards] = useState<React.ReactElement>(plug);
     const [show, setShow] = useState<boolean>(false);
     useEffect(()=>{
-        getAll().then((data)=>{setCards(<>{ 
-            data.map((card, index)=>{return <Card key={index} data={card} />})
-        }</>); setShow(true);}).catch();
+        filter(0);
     },[])
     
-    function filter(){
-        getFiltered(search, typeSelector, foodTypeSelector, sortSelector, budget, ratingSelector, watercheck, limit)
+    function filter(nLimit: number){
+        getFiltered(search, typeSelector, foodTypeSelector, sortSelector, budget, ratingSelector, watercheck, nLimit)
             .then((data)=>{
-                if(data.length > 0){
-                    setCards(<>{ data.map((card, index)=>{return <Card key={index} data={card} />})}</>);
-                    setShow(true);
+                if(data.cards.length > 0){
+                    setCards(
+                        <>
+                            {nLimit == 0 ? <></> : cards}
+                            {data.cards.map((card, index) => <Card key={index} data={card} />)}
+                        </>
+                    );
+                    data.showmore > 0 ? setShow(true) : setShow(false);
                 }
                 else{
                     setCards(<div style={{color: "var(--main-color)", fontSize: "30px", padding: "10vh 0"}}>Ничего не найдено</div>);
@@ -41,7 +46,7 @@ export default function Catalogue() {
             })
     }
 
-    useEffect(()=>{filter()},[limit])
+    //useEffect(()=>{filter(limit) },[limit])
 
     return (
         <>
@@ -55,7 +60,7 @@ export default function Catalogue() {
                     <Selector 
                         colorFlag={true} 
                         options={[
-                                {value:"-1", name:"Тип отеля"},
+                                {value:"-1", name:"Тип объекта"},
                                 {value:"-1", name:"Любой"},
                                 {value:"1", name:"Отель"},
                                 {value:"2", name:"Гостевой дом"},
@@ -105,7 +110,7 @@ export default function Catalogue() {
                     />
 
                     <WaterCheck text="У воды" func={setWatercheck}/>
-                    <button onClick={filter}>Применить</button>
+                    <button onClick={()=>{filter(0); setLimit(0);}}>Применить</button>
                 </div>
             </div>
 
@@ -115,7 +120,7 @@ export default function Catalogue() {
                 }
             </div>
             <div className={styles.moreButtonWrapper}>
-                {show ? <Button text="Показать больше" func={()=>{setLimit(limit+3);}}/> : <></>}
+                {show ? <Button text="Показать больше" func={()=>{filter(limit+3); setLimit(limit+3);}}/> : <></>}
             </div>
         </>
     );
